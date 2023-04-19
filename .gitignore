@@ -2,7 +2,15 @@
 __pycache__/
 
 # Ignore venv folder
+venvmac/
 venv/
 
 # Ignore instance folder (e.g., SQLite database)
 instance/
+
+# Ignore IDE Files
+.idea/
+
+# Ignore Mac files
+
+.DS_Store
