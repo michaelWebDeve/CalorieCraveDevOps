@@ -3,20 +3,34 @@ title: Home
 nav_order: 0
 ---
 
-# [Project Name]
-[Project description]
+# CalorieCrave
+
 
 ## Team members
 
-### [Jane Dane]
+### Linus Widing
+Linus Widing
+{: .label }
 
 About
-: Some info about Jane
+: xxx
 
 Matr.-Nr.
 : 1234567
 
-### [Joe Doe]
+### Justin Grünberg
+Justin Grünberg
+{: .label .label-green }
+
+About
+: Some info about Joe
+
+Matr.-Nr.
+: 1234567
+
+### Michael Otieno
+Michael Otieno
+{: .label .label-red }
 
 About
 : Some info about Joe
