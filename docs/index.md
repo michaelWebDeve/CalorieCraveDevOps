@@ -8,6 +8,8 @@ nav_order: 0
 
 ## Team members
 
+***Team Pick-Up***
+
 ### Linus Widing
 Linus Widing
 {: .label }
