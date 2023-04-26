@@ -13,30 +13,30 @@ Linus Widing
 {: .label }
 
 About
-: xxx
+: 22-jähriger Wirtschaftsinformatik Student(4. Semester) aus Schöneberg.
 
 Matr.-Nr.
-: 1234567
+: 77211922352
 
 ### Justin Grünberg
 Justin Grünberg
 {: .label .label-green }
 
 About
-: Some info about Joe
+: 25-jähriger Wirtschaftsinformatik Student(4. Semester) aus Großziehten.
 
 Matr.-Nr.
-: 1234567
+: 77211919598
 
 ### Michael Otieno
 Michael Otieno
 {: .label .label-red }
 
 About
-: Some info about Joe
+: 20-jähriger Wirtschaftsinformatik Student(4. Semester) aus Köpenick.
 
 Matr.-Nr.
-: 1234567
+: 77211917587
 
 ## Eidesstattliche Erklärung
 
