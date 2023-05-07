@@ -58,3 +58,13 @@ def user():
     else:
         return redirect(url_for("login"))
 
+
+@app.route('/logout')
+def logout():
+    if "email" in session:
+        session.clear()
+        flash("successfully logged out!")
+    else:
+        flash("you were not logged in!")
+    return redirect(url_for("login"))
+
