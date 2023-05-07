@@ -49,3 +49,12 @@ def login():
         else:
             return render_template("login.html")
 
+
+@app.route('/user')
+def user():
+    if "email" in session:
+        email = session["email"]
+        return render_template("user.html", email=email)
+    else:
+        return redirect(url_for("login"))
+
