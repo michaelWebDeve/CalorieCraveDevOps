@@ -1,5 +1,4 @@
 import os
-from flask import Flask, render_template, redirect, url_for, request
 from flask import Flask, render_template, request, session, redirect, url_for, flash
 from flask_sqlalchemy import SQLAlchemy
 
@@ -68,3 +67,25 @@ def logout():
         flash("you were not logged in!")
     return redirect(url_for("login"))
 
+
+@app.route('/register', methods=["GET", "POST"])
+def register():
+    if request.method == "POST":
+        email = request.form["emailAdr"]
+        pwd = request.form["pwd"]
+        conf_pwd = request.form["confPwd"]
+
+        exists = db.session.query(AppUser.id).filter_by(email=email).first() is not None
+        if exists:
+            flash("The email " + email + " is already registered!")
+        else:
+            if pwd != conf_pwd:
+                flash("Passwords are not matching")
+            else:
+                session["email"] = email
+                app_user = AppUser(email, pwd)
+                db.session.add(app_user)
+                db.session.commit()
+                return redirect(url_for("user"))
+
+    return render_template("register.html")
