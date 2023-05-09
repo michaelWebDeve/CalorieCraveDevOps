@@ -3,9 +3,6 @@
 {% block title %}Login{% endblock %}
 
 {% block content %}
-
-    <div style="margin: 10px">
-
         {% with messages = get_flashed_messages() %}
             {% if messages %}
                 {% for message in messages %}
@@ -30,7 +27,4 @@
             </div>
             <button type="submit" class="btn btn-primary">Login</button>
         </form>
-        <a href="/register"><button class="btn btn-primary" style="margin-top: 10px">Register</button></a>
-    </div>
-
 {% endblock %}

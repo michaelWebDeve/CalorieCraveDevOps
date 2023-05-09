@@ -4,9 +4,7 @@
 
 {% block content %}
 
-    <div style="margin: 10px">
-
-        {% with messages = get_flashed_messages() %}
+    {% with messages = get_flashed_messages() %}
             {% if messages %}
                 {% for message in messages %}
                     <div class="alert alert-warning alert-dismissible fade show" role="alert">
@@ -33,6 +31,5 @@
             </div>
             <button type="submit" class="btn btn-primary">Register</button>
         </form>
-    </div>
 
 {% endblock %}
