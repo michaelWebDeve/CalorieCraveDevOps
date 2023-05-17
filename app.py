@@ -23,7 +23,9 @@ class AppUser(db.Model):
 @app.route('/')
 def index():
     db.create_all()
-    return render_template("index.html")
+    if "email" in session:
+        return render_template("index.html")
+    return redirect(url_for("login"))
 
 
 @app.route('/login', methods=["POST", "GET"])
