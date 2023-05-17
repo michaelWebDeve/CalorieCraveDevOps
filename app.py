@@ -1,23 +1,14 @@
 import os
 from flask import Flask, render_template, request, session, redirect, url_for, flash
-from flask_sqlalchemy import SQLAlchemy
 
 app = Flask(__name__)
 app.secret_key = "secret"
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///users.db'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
-db = SQLAlchemy(app)
-
-
-class AppUser(db.Model):
-    id = db.Column("id", db.Integer, primary_key=True)
-    email = db.Column("email", db.String(100))
-    pwd = db.Column("pwd", db.String(100))
-
-    def __init__(self, email, pwd):
-        self.email = email
-        self.pwd = pwd
+from db import AppUser
+from db import db
+from db import Recipe, RecipeIngredient
 
 
 @app.route('/')
