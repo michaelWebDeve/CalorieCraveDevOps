@@ -32,6 +32,15 @@ class Recipe(db.Model):
     #     self.description = description
     #     self.image_path = image_path
 
+    def calc_kcal(self):
+        total = 0
+        for i in self.ingredients:
+            total += i.kcal * (i.quantity / 100)
+        return int(total)
+
+    def get_img_path(self):
+        return "instance/images/" + str(self.id) + ".jpg"
+
 
 class RecipeIngredient(db.Model):
     __table_name__ = "recipe_ingredient"
