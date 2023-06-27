@@ -1,4 +1,5 @@
 import os
+import random
 from flask import Flask, render_template, request, session, redirect, url_for, flash
 
 app = Flask(__name__)
@@ -82,3 +83,28 @@ def register():
                 return redirect(url_for("user"))
 
     return render_template("register.html")
+
+
+@app.route("/populate-db")
+def pop_db():
+
+    for i in range(20):
+        base_image = open("static/images/base.jpg", "rb")
+        recipe = Recipe(name=f"Recipe{i}", description="Test description")
+        ingredients = []
+        ing_amount = random.randint(1, 10)
+        for j in range(ing_amount):
+            kcal = random.randint(0, 500)
+            quantity = random.randint(50, 500)
+            ing = RecipeIngredient(name=f"Ingredient{j}", kcal=kcal, quantity=quantity, recipe=recipe)
+            ingredients.append(ing)
+
+        db.session.add(recipe)
+        db.session.add_all(ingredients)
+        db.session.commit()
+        recipe_image = open(f"static/instance/images/{recipe.id}.jpg", "wb")
+        for line in base_image:
+            recipe_image.write(line)
+        recipe_image.close()
+        base_image.close()
+    return "Database populated!"
