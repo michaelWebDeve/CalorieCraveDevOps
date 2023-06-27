@@ -39,6 +39,7 @@ class RecipeIngredient(db.Model):
     id = db.Column("id", db.Integer, primary_key=True)
     name = db.Column("name", db.String(100))
     kcal = db.Column("kcal", db.Integer)
+    protein = db.Column("protein", db.Integer)
     quantity = db.Column("quantity", db.Integer)
     recipe_id = db.Column(db.Integer, db.ForeignKey("recipe.id"))
 
