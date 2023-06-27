@@ -1,0 +1,20 @@
+:root{
+    --cstm_bg: rgb(34, 36, 49);
+    --cstm_fg_50: rgba(255, 255, 255, 0.1);
+    --cstm_fg_100: rgba(58, 59, 68, 1);
+    --cstm_primary: rgb(66, 130, 246);
+    --cstm_secondary: rgb(236, 159, 74);
+}
+
+nav{
+    background-color: rgb(25, 29, 42) !important;
+    box-shadow: 0 2px 4px -2px rgba(0,0,0,.2);
+}
+
+body{
+    background: var(--cstm_bg) !important;
+}
+
+.content{
+    margin-top: 60px;
+}

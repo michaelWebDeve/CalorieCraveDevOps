@@ -1,0 +1,18 @@
+:root {
+  --cstm_bg: #222431;
+  --cstm_fg_50: rgba(255, 255, 255, 0.1);
+  --cstm_fg_100: #3a3b44;
+  --cstm_primary: #4282f6;
+  --cstm_secondary: #ec9f4a; }
+
+nav {
+  background-color: #191d2a !important;
+  box-shadow: 0 2px 4px -2px rgba(0, 0, 0, 0.2); }
+
+body {
+  background: var(--cstm_bg) !important; }
+
+.content {
+  margin-top: 60px; }
+
+/*# sourceMappingURL=base.css.map */
