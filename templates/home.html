@@ -1,0 +1,37 @@
+{% extends "base.html" %}
+
+{% block title %}Home{% endblock %}
+{% block stylesheet %}
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles/home.css') }}">
+{% endblock %}
+
+{% block content %}
+    {% for r in recipes %}
+        <div class="recipe">
+            <img src="{{ url_for("static", filename=r.get_img_path()) }}" alt="indisch">
+            <div class="recipe_info_container">
+                <h1><a href="#">{{ r.name }}</a></h1>
+                <table class="nutrition">
+                    <tr>
+                        <td class="nutrition_label">kcal</td>
+                        <td>{{ r.calc_kcal() }}</td>
+                    </tr>
+                    <tr>
+                        <td class="nutrition_label">Protein</td>
+                        <td>--g</td>
+                    </tr>
+                </table>
+                <table>
+                    <tr>
+                        <td class="tag_label">Ingredients</td>
+                        <td class="tag_value">{{ r.ingredients|length }}</td>
+                    </tr>
+                    <tr>
+                        <td class="tag_label">Prep time</td>
+                        <td class="tag_value">-- min</td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+    {% endfor %}
+{% endblock %}

@@ -15,8 +15,9 @@ from db import Recipe, RecipeIngredient
 @app.route('/')
 def index():
     db.create_all()
+    recipes = Recipe.query.all()
     if "email" in session:
-        return render_template("index.html")
+        return render_template("home.html", recipes=recipes)
     return redirect(url_for("login"))
 
 
