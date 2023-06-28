@@ -5,31 +5,33 @@
 {% block content %}
 
     {% with messages = get_flashed_messages() %}
-            {% if messages %}
-                {% for message in messages %}
-                    <div class="alert alert-warning alert-dismissible fade show" role="alert">
-                        {{ message }}
-                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
-                    </div>
-                {% endfor %}
-            {% endif %}
-        {% endwith %}
+        {% if messages %}
+            {% for message in messages %}
+                <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                    {{ message }}
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+            {% endfor %}
+        {% endif %}
+    {% endwith %}
 
-        <form method="post">
-            <div class="form-group">
-                <label for="exampleInputEmail1">Email address</label>
-                <input type="email" name="emailAdr" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email">
-            </div>
-            <div class="form-group">
-                <label for="exampleInputPassword1">Password</label>
-                <input type="password" name="pwd" class="form-control" id="exampleInputPassword1" placeholder="Password">
-            </div>
-            <div class="form-group">
-                <input type="password" name="confPwd" class="form-control" id="exampleInputPassword1" placeholder="Confirm Password">
-            </div>
-            <button type="submit" class="btn btn-primary">Register</button>
-        </form>
+    <form method="post">
+        <div class="mb-3">
+            <label for="emailInput" class="form-label">Email address</label>
+            <input type="email" name="email" class="form-control" id="emailInput" aria-describedby="emailHelp"
+                   placeholder="Enter Email">
+        </div>
+        <div class="mb-3">
+            <label for="passwordInput" class="form-label">Password</label>
+            <input type="password" name="password" class="form-control" id="passwordInput" aria-describedby="emailHelp"
+                   placeholder="Enter password">
+        </div>
+        <div class="mb-3">
+            <label for="confPasswordInput" class="form-label">Confirm Password</label>
+            <input type="password" name="password_confirm" class="form-control" id="confPasswordInput"
+                   aria-describedby="emailHelp" placeholder="Confirm password">
+        </div>
+        <button type="submit" class="btn btn-primary">Register</button>
+    </form>
 
 {% endblock %}

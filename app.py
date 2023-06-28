@@ -24,8 +24,8 @@ def index():
 @app.route('/login', methods=["POST", "GET"])
 def login():
     if request.method == "POST":
-        email = request.form["emailAdr"]
-        pw = request.form["pwd"]
+        email = request.form["email"]
+        pw = request.form["password"]
 
         app_user = db.session.query(AppUser).filter_by(email=email).first()
         if app_user is not None:
@@ -66,9 +66,9 @@ def logout():
 @app.route('/register', methods=["GET", "POST"])
 def register():
     if request.method == "POST":
-        email = request.form["emailAdr"]
-        pwd = request.form["pwd"]
-        conf_pwd = request.form["confPwd"]
+        email = request.form["email"]
+        pwd = request.form["password"]
+        conf_pwd = request.form["password_confirm"]
 
         exists = db.session.query(AppUser.id).filter_by(email=email).first() is not None
         if exists:
