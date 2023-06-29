@@ -10,6 +10,9 @@ app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 from db import AppUser
 from db import db
 from db import Recipe, RecipeIngredient
+from api import api
+
+app.register_blueprint(api, url_prefix="/api")
 
 
 @app.route('/')
