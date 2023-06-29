@@ -30,10 +30,6 @@ class Recipe(db.Model, SerializerMixin):
 
     ingredients = db.relationship('RecipeIngredient', backref='recipe')
 
-    # def __init__(self, name, description, image_path):
-    #     self.name = name
-    #     self.description = description
-    #     self.image_path = image_path
     def calc_kcal(self):
         total = 0
         for i in self.ingredients:
@@ -54,7 +50,3 @@ class RecipeIngredient(db.Model, SerializerMixin):
     quantity = db.Column("quantity", db.Integer)
     recipe_id = db.Column(db.Integer, db.ForeignKey("recipe.id"))
 
-    # def __init__(self, name, kcal, quantity):
-    #     self.name = name
-    #     self.kcal = kcal
-    #     self.quantity = quantity
