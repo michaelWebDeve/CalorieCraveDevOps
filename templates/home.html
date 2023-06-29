@@ -1,37 +1,114 @@
 {% extends "base.html" %}
 
 {% block title %}Home{% endblock %}
+
 {% block stylesheet %}
     <link rel="stylesheet" href="{{ url_for('static', filename='styles/home.css') }}">
 {% endblock %}
 
 {% block content %}
-    {% for r in recipes %}
-        <div class="recipe">
-            <img src="{{ url_for("static", filename=r.get_img_path()) }}" alt="indisch">
-            <div class="recipe_info_container">
-                <h1><a href="#">{{ r.name }}</a></h1>
-                <table class="nutrition">
-                    <tr>
-                        <td class="nutrition_label">kcal</td>
-                        <td>{{ r.calc_kcal() }}</td>
-                    </tr>
-                    <tr>
-                        <td class="nutrition_label">Protein</td>
-                        <td>--g</td>
-                    </tr>
-                </table>
-                <table>
-                    <tr>
-                        <td class="tag_label">Ingredients</td>
-                        <td class="tag_value">{{ r.ingredients|length }}</td>
-                    </tr>
-                    <tr>
-                        <td class="tag_label">Prep time</td>
-                        <td class="tag_value">-- min</td>
-                    </tr>
-                </table>
+    <div id="recipe-container">
+        {% for r in recipes %}
+            <div class="recipe">
+                <img src="{{ url_for("static", filename=r.img_path()) }}" alt="indisch">
+                <div class="recipe_info_container">
+                    <h1><a href="#">{{ r.name }}</a></h1>
+                    <table class="nutrition">
+                        <tr>
+                            <td class="nutrition_label">kcal</td>
+                            <td>{{ r.total_kcal() }}</td>
+                        </tr>
+                        <tr>
+                            <td class="nutrition_label">Protein</td>
+                            <td>{{ r.total_protein() }}g</td>
+                        </tr>
+                    </table>
+                    <table>
+                        <tr>
+                            <td class="tag_label">Ingredients</td>
+                            <td class="tag_value">{{ r.ingredients|length }}</td>
+                        </tr>
+                        <tr>
+                            <td class="tag_label">Prep time</td>
+                            <td class="tag_value">-- min</td>
+                        </tr>
+                    </table>
+                </div>
             </div>
-        </div>
-    {% endfor %}
+        {% endfor %}
+    </div>
+
+{% endblock %}
+
+{% block scripts %}
+
+    <script type="text/javascript">
+        var counter = 1;
+        var limit = 10;
+        var end = false;
+        $(window).scroll(() => {
+            var current_y = Math.floor($(window).scrollTop());
+            var window_height = Math.floor($(window).height());
+            var document_height = Math.floor($(document).height());
+            if (current_y + window_height === document_height) {
+                counter += 1;
+                downloadContent(counter, 10)
+            }
+
+            function downloadContent(counter, limit) {
+                if (!end) {
+                    $.get("/api/recipes/?counter=" + counter + "&limit=" + limit, function (data) {
+                        data.forEach(recipe => {
+                            // Create a new recipe element
+                            const recipeElement = document.createElement('div');
+                            recipeElement.classList.add('recipe');
+                            // Add appropriate classes and attributes to the recipe element if needed
+
+                            // Create the HTML structure and content for the recipe element
+                            const recipeContent = `
+                            <img src="/static/${recipe.img_path}" alt="indisch">
+                            <div class="recipe_info_container">
+                                <h1><a href="#">${recipe.name}</a></h1>
+                                <table class="nutrition">
+                                    <tr>
+                                        <td class="nutrition_label">kcal</td>
+                                        <td>${recipe.total_kcal}</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="nutrition_label">Protein</td>
+                                        <td>${recipe.total_protein}g</td>
+                                    </tr>
+                                </table>
+                                <table>
+                                    <tr>
+                                        <td class="tag_label">Ingredients</td>
+                                        <td class="tag_value">${recipe.ingredients_amount}</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="tag_label">Prep time</td>
+                                        <td class="tag_value">-- min</td>
+                                    </tr>
+                                </table>
+                            </div>
+                        `;
+
+                            // Set the HTML content of the recipe element
+                            recipeElement.innerHTML = recipeContent;
+
+                            // Append the recipe element to the container
+                            const container = document.getElementById('recipe-container');
+                            container.appendChild(recipeElement);
+                        });
+                    }).fail(function () {
+                        const container = document.getElementById('recipe-container');
+                        const endElement = document.createElement('div');
+                        endElement.innerHTML = "<h1>End of Content</h1>"
+                        container.appendChild(endElement);
+                        end = true;
+                    });
+                }
+            }
+        });
+    </script>
+
 {% endblock %}

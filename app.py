@@ -18,7 +18,7 @@ app.register_blueprint(api, url_prefix="/api")
 @app.route('/')
 def index():
     db.create_all()
-    recipes = Recipe.query.all()
+    recipes = Recipe.query.order_by(Recipe.id).limit(10).all()
     if "email" in session:
         return render_template("home.html", recipes=recipes)
     return redirect(url_for("login"))
@@ -91,7 +91,6 @@ def register():
 
 @app.route("/populate-db")
 def pop_db():
-
     for i in range(20):
         base_image = open("static/images/base.jpg", "rb")
         recipe = Recipe(name=f"Recipe{i}", description="Test description")
