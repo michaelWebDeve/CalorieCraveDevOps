@@ -1,4 +1,5 @@
 from flask_sqlalchemy import SQLAlchemy
+from sqlalchemy_serializer import SerializerMixin
 
 from app import app
 
@@ -17,8 +18,10 @@ class AppUser(db.Model):
         self.pwd = pwd
 
 
-class Recipe(db.Model):
+class Recipe(db.Model, SerializerMixin):
     __table_name__ = "recipe"
+
+    serialize_rules = ("-ingredients.recipe",)
 
     id = db.Column("id", db.Integer, primary_key=True)
     name = db.Column("name", db.String(100))
@@ -31,7 +34,6 @@ class Recipe(db.Model):
     #     self.name = name
     #     self.description = description
     #     self.image_path = image_path
-
     def calc_kcal(self):
         total = 0
         for i in self.ingredients:
@@ -42,7 +44,7 @@ class Recipe(db.Model):
         return "instance/images/" + str(self.id) + ".jpg"
 
 
-class RecipeIngredient(db.Model):
+class RecipeIngredient(db.Model, SerializerMixin):
     __table_name__ = "recipe_ingredient"
 
     id = db.Column("id", db.Integer, primary_key=True)
