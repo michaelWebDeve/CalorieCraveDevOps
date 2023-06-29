@@ -30,14 +30,23 @@ class Recipe(db.Model, SerializerMixin):
 
     ingredients = db.relationship('RecipeIngredient', backref='recipe')
 
-    def calc_kcal(self):
+    def total_kcal(self):
         total = 0
         for i in self.ingredients:
             total += i.kcal * (i.quantity / 100)
         return int(total)
 
-    def get_img_path(self):
+    def img_path(self):
         return "instance/images/" + str(self.id) + ".jpg"
+
+    def ingredients_amount(self):
+        return len(self.ingredients)
+
+    def total_protein(self):
+        total = 0
+        for i in self.ingredients:
+            total += i.protein * (i.quantity / 100)
+        return int(total)
 
 
 class RecipeIngredient(db.Model, SerializerMixin):
@@ -49,4 +58,3 @@ class RecipeIngredient(db.Model, SerializerMixin):
     protein = db.Column("protein", db.Integer)
     quantity = db.Column("quantity", db.Integer)
     recipe_id = db.Column(db.Integer, db.ForeignKey("recipe.id"))
-
