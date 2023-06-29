@@ -100,7 +100,8 @@ def pop_db():
         for j in range(ing_amount):
             kcal = random.randint(0, 500)
             quantity = random.randint(50, 500)
-            ing = RecipeIngredient(name=f"Ingredient{j}", kcal=kcal, quantity=quantity, recipe=recipe)
+            protein = random.randint(5, 30)
+            ing = RecipeIngredient(name=f"Ingredient{j}", kcal=kcal, protein=protein ,quantity=quantity, recipe=recipe)
             ingredients.append(ing)
 
         db.session.add(recipe)
