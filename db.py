@@ -26,15 +26,10 @@ class Recipe(db.Model, SerializerMixin):
     id = db.Column("id", db.Integer, primary_key=True)
     name = db.Column("name", db.String(100))
     description = db.Column("description", db.String(100))
-    image_path = db.Column("image_path", db.String(200))
+    total_kcal = db.Column("total_kcal", db.Integer)
+    total_protein = db.Column("total_protein", db.Integer)
 
     ingredients = db.relationship('RecipeIngredient', backref='recipe')
-
-    def total_kcal(self):
-        total = 0
-        for i in self.ingredients:
-            total += i.kcal * (i.quantity / 100)
-        return int(total)
 
     def img_path(self):
         return "instance/images/" + str(self.id) + ".jpg"
@@ -42,19 +37,14 @@ class Recipe(db.Model, SerializerMixin):
     def ingredients_amount(self):
         return len(self.ingredients)
 
-    def total_protein(self):
-        total = 0
-        for i in self.ingredients:
-            total += i.protein * (i.quantity / 100)
-        return int(total)
-
 
 class RecipeIngredient(db.Model, SerializerMixin):
     __table_name__ = "recipe_ingredient"
 
     id = db.Column("id", db.Integer, primary_key=True)
     name = db.Column("name", db.String(100))
-    kcal = db.Column("kcal", db.Integer)
+    fat = db.Column("fat", db.Integer)
+    carbs = db.Column("carbs", db.Integer)
     protein = db.Column("protein", db.Integer)
     quantity = db.Column("quantity", db.Integer)
     recipe_id = db.Column(db.Integer, db.ForeignKey("recipe.id"))
