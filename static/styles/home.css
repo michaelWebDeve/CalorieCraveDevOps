@@ -1,19 +1,18 @@
 @import url("https://fonts.googleapis.com/css2?family=Lato:wght@400;700&display=swap");
-.content {
-  padding: 20px;
+#recipe-container {
   background-color: var(--cstm_bg); }
 
 .recipe {
   background-color: var(--cstm_fg_50);
   border-radius: 10px;
   padding: 20px;
-  margin: 20px;
+  margin: 0 20px 20px 20px;
   display: flex;
   flex-direction: row; }
   .recipe img {
     object-fit: cover;
-    width: 230px;
-    height: 230px;
+    width: 200px;
+    height: 200px;
     border-radius: 10px; }
   .recipe h1 a {
     text-decoration: none;
