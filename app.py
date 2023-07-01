@@ -91,18 +91,33 @@ def register():
 
 @app.route("/populate-db")
 def pop_db():
-    for i in range(20):
+    for i in range(35):
         base_image = open("static/images/base.jpg", "rb")
+        total_kcal = 0
+        total_protein = 0
         recipe = Recipe(name=f"Recipe{i}", description="Test description")
         ingredients = []
         ing_amount = random.randint(1, 10)
         for j in range(ing_amount):
-            kcal = random.randint(0, 500)
-            quantity = random.randint(50, 500)
             protein = random.randint(5, 30)
-            ing = RecipeIngredient(name=f"Ingredient{j}", kcal=kcal, protein=protein ,quantity=quantity, recipe=recipe)
+            carbs = random.randint(20, 60)
+            fat = random.randint(5, 40)
+            quantity = random.randint(50, 500)
+            ing = RecipeIngredient(name=f"Ingredient{j}",
+                                   protein=protein,
+                                   quantity=quantity,
+                                   carbs=carbs,
+                                   fat=fat,
+                                   recipe=recipe)
+
+            total_kcal += ((protein*4.1) + (carbs*4.1) + (fat*9.3)) * (quantity/100)
+
+            total_protein += protein * (quantity / 100)
+
             ingredients.append(ing)
 
+        recipe.total_kcal = int(total_kcal)
+        recipe.total_protein = int(total_protein)
         db.session.add(recipe)
         db.session.add_all(ingredients)
         db.session.commit()
