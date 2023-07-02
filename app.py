@@ -95,7 +95,8 @@ def pop_db():
         base_image = open("static/images/base.jpg", "rb")
         total_kcal = 0
         total_protein = 0
-        recipe = Recipe(name=f"Recipe{i}", description="Test description")
+        prep_time = random.randint(5, 120)
+        recipe = Recipe(name=f"Recipe{i}", description="Test description", prep_time=prep_time)
         ingredients = []
         ing_amount = random.randint(1, 10)
         for j in range(ing_amount):

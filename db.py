@@ -26,6 +26,7 @@ class Recipe(db.Model, SerializerMixin):
     id = db.Column("id", db.Integer, primary_key=True)
     name = db.Column("name", db.String(100))
     description = db.Column("description", db.String(100))
+    prep_time = db.Column("prep_time", db.Integer)
     total_kcal = db.Column("total_kcal", db.Integer)
     total_protein = db.Column("total_protein", db.Integer)
 
