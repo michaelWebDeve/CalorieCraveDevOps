@@ -60,6 +60,7 @@ Also, we are most likely going to change the database schema a lot, wich is less
 |------|-------------------------------------|--------------------------------------------------------------------------|
 | Pros | - we already know what we are doing | - less code<br/>- querying is much easier<br/>- easy to connect to flask |
 | Cons | - a lot of boilerplate code         | - we need to learn how to use SQLAlchemy                                 |
+
 ---
 
 
@@ -91,6 +92,7 @@ We have chosen Bootstrap for our app's design due to its vast array of customiza
 |------|-------------------------|----------------------|
 | Pros | - efficiency and Speed  | - full Customization |
 | Cons | - limited Customization | - time-Consuming     |
+
 ---
 
 
@@ -130,6 +132,7 @@ a straightforward way to create and handle submissions without relying on extern
 |------|---------------------------------------------------------------------------------------------------------|----------------------------------------------------------------------------------------|
 | Pros | - simplification for defining and validating forms using Python classes.<br/>- Built-in form validation | - Simple and flexible<br/>- Customizable using CSS and JavaScript                      |
 | Cons | - Learning curve                                                                                        | - No built-in abstraction or validation<br/>- Requires more manual handling and coding |
+
 ---
 
 
