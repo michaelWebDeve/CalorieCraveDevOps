@@ -47,25 +47,6 @@ def login():
             return render_template("login.html")
 
 
-@app.route('/user')
-def user():
-    if "email" in session:
-        email = session["email"]
-        return render_template("user.html", email=email)
-    else:
-        return redirect(url_for("login"))
-
-
-@app.route('/logout')
-def logout():
-    if "email" in session:
-        session.clear()
-        flash("successfully logged out!")
-    else:
-        flash("you were not logged in!")
-    return redirect(url_for("login"))
-
-
 @app.route('/register', methods=["GET", "POST"])
 def register():
     if request.method == "POST":
@@ -87,6 +68,25 @@ def register():
                 return redirect(url_for("user"))
 
     return render_template("register.html")
+
+
+@app.route('/user')
+def user():
+    if "email" in session:
+        email = session["email"]
+        return render_template("user.html", email=email)
+    else:
+        return redirect(url_for("login"))
+
+
+@app.route('/logout')
+def logout():
+    if "email" in session:
+        session.clear()
+        flash("successfully logged out!")
+    else:
+        flash("you were not logged in!")
+    return redirect(url_for("login"))
 
 
 @app.route("/populate-db")
