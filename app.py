@@ -36,9 +36,9 @@ def login():
                 session["email"] = email
                 return redirect(url_for("user"))
             else:
-                flash("Password incorrect!")
+                flash("Password incorrect!", "error")
         else:
-            flash(email + " is not registered!")
+            flash(email + " is not registered!", "error")
         return redirect(url_for("login"))
     else:
         if "email" in session:
@@ -56,10 +56,10 @@ def register():
 
         exists = db.session.query(AppUser.id).filter_by(email=email).first() is not None
         if exists:
-            flash("The email " + email + " is already registered!")
+            flash("The email " + email + " is already registered!", "error")
         else:
             if pwd != conf_pwd:
-                flash("Passwords are not matching")
+                flash("Passwords are not matching", "error")
             else:
                 session["email"] = email
                 app_user = AppUser(email, pwd)
@@ -83,9 +83,9 @@ def user():
 def logout():
     if "email" in session:
         session.clear()
-        flash("successfully logged out!")
+        flash("successfully logged out!", "success")
     else:
-        flash("you were not logged in!")
+        flash("you were not logged in!", "error")
     return redirect(url_for("login"))
 
 
