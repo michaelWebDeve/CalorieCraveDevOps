@@ -47,7 +47,10 @@
                     <label class="form-check-label" for="gluten_free">Gluten free</label>
                 </div>
             </div>
-            <button type="submit" class="btn btn-primary mb-3" id="filter_btn">Filter</button>
+            <div class="d-flex justify-content-between">
+                <button type="submit" class="btn btn-primary mb-3" id="filter_btn">Filter</button>
+                <button role="button" onclick="window.location.href='/';" class="btn btn-danger mb-3" id="filter_reset_btn">Reset</button>
+            </div>
         </div>
         <div class="col-10 p-0">
             <div id="recipe-container">
