@@ -20,6 +20,10 @@ def fetch_recipes():
         min_protein = int(request.args.get("min_protein"))
         recipes = recipes.filter(Recipe.total_protein > min_protein)
 
+    if "max_prep_time" in request.args:
+        max_prep_time = int(request.args.get("max_prep_time"))
+        recipes = recipes.filter(Recipe.prep_time < max_prep_time)
+
     if ("limit" and "counter") in request.args:
         limit = int(request.args.get("limit"))
         counter = int(request.args.get("counter"))

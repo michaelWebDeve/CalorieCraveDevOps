@@ -14,7 +14,7 @@
                     <input type="number" class="form-control" id="min_kcal" placeholder="Min. kcal">
                     <label for="min_kcal">Min. kcal</label>
                 </div>
-                <span class="input-group-text">kcal</span>
+                <span class="input-group-text w-25 justify-content-center">kcal</span>
             </div>
 
             <div class="input-group mb-3 text-secondary">
@@ -22,7 +22,7 @@
                     <input type="number" class="form-control" id="max_kcal" placeholder="Max. kcal">
                     <label for="max_kcal">Max. kcal</label>
                 </div>
-                <span class="input-group-text">kcal</span>
+                <span class="input-group-text w-25 justify-content-center">kcal</span>
             </div>
 
             <div class="input-group mb-3 text-secondary">
@@ -30,7 +30,15 @@
                     <input type="number" class="form-control" id="min_protein" placeholder="Min. protein">
                     <label for="min_protein">Min. protein</label>
                 </div>
-                <span class="input-group-text">g</span>
+                <span class="input-group-text w-25 justify-content-center">g</span>
+            </div>
+
+            <div class="input-group mb-3 text-secondary">
+                <div class="form-floating">
+                    <input type="number" class="form-control" id="max_prep_time" placeholder="Max. prep time">
+                    <label for="max_prep_time">Max. prep time</label>
+                </div>
+                <span class="input-group-text w-25 justify-content-center">min</span>
             </div>
 
             <div class="mb-3">
@@ -99,6 +107,7 @@
             var min_kcal = $("#min_kcal").val();
             var max_kcal = $("#max_kcal").val();
             var min_protein = $("#min_protein").val();
+            var max_prep_time = $("#max_prep_time").val();
             var vegetarian = $("#vegetarian").is(":checked");
             var vegan = $("#vegan").is(":checked");
             var gluten_free = $("#gluten_free").is(":checked");
@@ -117,6 +126,9 @@
             }
             if(min_protein){
                 query_str = query_str + "&min_protein="+min_protein;
+            }
+            if(max_prep_time){
+                query_str = query_str + "&max_prep_time="+max_prep_time;
             }
             flushContent();
             counter = 1;
