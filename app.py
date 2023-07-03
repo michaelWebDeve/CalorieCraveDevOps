@@ -89,6 +89,16 @@ def logout():
     return redirect(url_for("login"))
 
 
+@app.route("/recipe/<recipe_id>")
+def get_recipe(recipe_id):
+    recipe_id = int(recipe_id)
+    recipe = Recipe.query.get(recipe_id)
+    if recipe:
+        return render_template("recipe.html", r=recipe)
+    else:
+        return "404"
+
+
 @app.route("/populate-db")
 def pop_db():
     for i in range(35):

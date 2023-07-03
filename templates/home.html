@@ -66,7 +66,7 @@
                     <div class="recipe">
                         <img src="{{ url_for("static", filename=r.img_path()) }}" alt="indisch">
                         <div class="recipe_info_container">
-                            <h1><a href="#">{{ r.name }}</a></h1>
+                            <h1><a href="/recipe/{{ r.id }}">{{ r.name }}</a></h1>
                             <table class="nutrition">
                                 <tr>
                                     <td class="nutrition_label">kcal</td>
@@ -169,7 +169,7 @@
                             const recipeContent = `
                             <img src="/static/${recipe.img_path}" alt="indisch">
                             <div class="recipe_info_container">
-                                <h1><a href="#">${recipe.name}</a></h1>
+                                <h1><a href="/recipe/${recipe.id}">${recipe.name}</a></h1>
                                 <table class="nutrition">
                                     <tr>
                                         <td class="nutrition_label">kcal</td>
