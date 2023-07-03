@@ -60,37 +60,37 @@
                 <button role="button" onclick="window.location.href='/';" class="btn btn-danger mb-3" id="filter_reset_btn">Reset</button>
             </div>
         </div>
-        <div class="col-10 p-0">
-            <div id="recipe-container">
-                {% for r in recipes %}
-                    <div class="recipe">
-                        <img src="{{ url_for("static", filename=r.img_path()) }}" alt="indisch">
-                        <div class="recipe_info_container">
-                            <h1><a href="/recipe/{{ r.id }}">{{ r.name }}</a></h1>
-                            <table class="nutrition">
-                                <tr>
-                                    <td class="nutrition_label">kcal</td>
-                                    <td>{{ r.total_kcal }}</td>
-                                </tr>
-                                <tr>
-                                    <td class="nutrition_label">Protein</td>
-                                    <td>{{ r.total_protein }}g</td>
-                                </tr>
-                            </table>
-                            <table>
-                                <tr>
-                                    <td class="tag_label">Ingredients</td>
-                                    <td class="tag_value">{{ r.ingredients|length }}</td>
-                                </tr>
-                                <tr>
-                                    <td class="tag_label">Prep time</td>
-                                    <td class="tag_value">{{ r.prep_time }} min</td>
-                                </tr>
-                            </table>
-                        </div>
+        <div id="recipe-container" class="col-10 px-4 m-0">
+            {% for r in recipes %}
+                <div class="recipe bg-secondary mb-4 row m-0 p-4 rounded-3" style="--bs-bg-opacity: .2;">
+                    <div class="col-3 p-0">
+                        <img src="{{ url_for("static", filename=r.img_path()) }}" alt="indisch" class="rounded-3 w-100 h-100" style="object-fit: cover;">
                     </div>
-                {% endfor %}
-            </div>
+                    <div class="recipe_info_container col-9">
+                        <h1><a class="text-white link-light" href="/recipe/{{ r.id }}" style="text-decoration: none">{{ r.name }}</a></h1>
+                        <table class="nutrition fs-4">
+                            <tr>
+                                <td class="nutrition_label text-end pe-3 text-primary">kcal</td>
+                                <td>{{ r.total_kcal }}</td>
+                            </tr>
+                            <tr>
+                                <td class="nutrition_label text-end pe-3 text-primary">Protein</td>
+                                <td>{{ r.total_protein }}g</td>
+                            </tr>
+                        </table>
+                        <table>
+                            <tr>
+                                <td class="tag_label text-end pe-2 text-warning">Ingredients</td>
+                                <td class="tag_value">{{ r.ingredients|length }}</td>
+                            </tr>
+                            <tr>
+                                <td class="tag_label text-end pe-2 text-warning">Prep time</td>
+                                <td class="tag_value">{{ r.prep_time }} min</td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+            {% endfor %}
         </div>
     </div>
 
@@ -162,34 +162,34 @@
                         data.forEach(recipe => {
                             // Create a new recipe element
                             const recipeElement = document.createElement('div');
-                            recipeElement.classList.add('recipe');
-                            // Add appropriate classes and attributes to the recipe element if needed
-
-                            // Create the HTML structure and content for the recipe element
                             const recipeContent = `
-                            <img src="/static/${recipe.img_path}" alt="indisch">
-                            <div class="recipe_info_container">
-                                <h1><a href="/recipe/${recipe.id}">${recipe.name}</a></h1>
-                                <table class="nutrition">
-                                    <tr>
-                                        <td class="nutrition_label">kcal</td>
-                                        <td>${recipe.total_kcal}</td>
-                                    </tr>
-                                    <tr>
-                                        <td class="nutrition_label">Protein</td>
-                                        <td>${recipe.total_protein}g</td>
-                                    </tr>
-                                </table>
-                                <table>
-                                    <tr>
-                                        <td class="tag_label">Ingredients</td>
-                                        <td class="tag_value">${recipe.ingredients_amount}</td>
-                                    </tr>
-                                    <tr>
-                                        <td class="tag_label">Prep time</td>
-                                        <td class="tag_value">${recipe.prep_time} min</td>
-                                    </tr>
-                                </table>
+                            <div class="recipe bg-secondary mb-4 row m-0 p-4 rounded-3" style="--bs-bg-opacity: .2;">
+                                <div class="col-3">
+                                    <img src="/static/${recipe.img_path}" alt="indisch" class="rounded-3 w-100 h-100" style="object-fit: cover;">
+                                </div>
+                                <div class="recipe_info_container col-9">
+                                    <h1><a class="text-white link-light" href="/recipe/${recipe.id}" style="text-decoration: none">${recipe.name}</a></h1>
+                                    <table class="nutrition fs-4">
+                                        <tr>
+                                            <td class="nutrition_label text-end pe-3 text-primary">kcal</td>
+                                            <td>${recipe.total_kcal}</td>
+                                        </tr>
+                                        <tr>
+                                            <td class="nutrition_label text-end pe-3 text-primary">Protein</td>
+                                            <td>${recipe.total_protein}g</td>
+                                        </tr>
+                                    </table>
+                                    <table>
+                                        <tr>
+                                            <td class="tag_label text-end pe-2 text-warning">Ingredients</td>
+                                    <td class="tag_value">${recipe.ingredients_amount}</td>
+                                        </tr>
+                                        <tr>
+                                            <td class="tag_label text-end pe-2 text-warning">Prep time</td>
+                                            <td class="tag_value">${recipe.prep_time} min</td>
+                                        </tr>
+                                    </table>
+                                </div>
                             </div>
                         `;
 
@@ -207,7 +207,6 @@
                             <div class="d-flex justify-content-center">
                                 <p class="fs-5 text-secondary">No more recipes!</p>
                             </div>
-
                         `
                         container.appendChild(endElement);
                         end = true;
