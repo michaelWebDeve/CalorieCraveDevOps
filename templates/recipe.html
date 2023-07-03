@@ -1,0 +1,46 @@
+{% extends "base.html" %}
+
+{% block title %}{{ r.name }}{% endblock %}
+
+{% block content %}
+    <div class="row m-3">
+        <div class="row">
+            <h1>{{ r.name }}</h1>
+            <p class="fst-italic">{{ r.description }}</p>
+        </div>
+        <div class="row">
+            <div class="col-6">
+                <img class="w-100" src="../static/images/base.jpg" alt="base image">
+            </div>
+            <div class="col-2">
+                <h2>Ingredients</h2>
+                <ul class="list-group">
+                    {% for i in r.ingredients %}
+                        <li style="list-style: none;">{{ i.name }}: {{ i.quantity }}g</li>
+                    {% endfor %}
+                </ul>
+                <hr>
+                <table class="fs-5">
+                    <tr>
+                        <td class="text-end text-primary">kcal</td>
+                        <td class="ps-2">{{ r.total_kcal }}</td>
+                    </tr>
+                    <tr>
+                        <td class="text-end text-primary">Protein</td>
+                        <td class="ps-2">{{ r.total_protein }}g</td>
+                    </tr>
+                </table>
+            </div>
+            <div class="col-4">
+                <h2>Instructions</h2>
+                {% for s in r.instruction_list() %}
+                    <p class="m-0">{{ s }}</p>
+                {% endfor %}
+            </div>
+        </div>
+        <div class="row">
+
+        </div>
+    </div>
+
+{% endblock %}
