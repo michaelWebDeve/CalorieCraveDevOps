@@ -96,7 +96,13 @@ def pop_db():
         total_kcal = 0
         total_protein = 0
         prep_time = random.randint(5, 120)
-        recipe = Recipe(name=f"Recipe{i}", description="Test description", prep_time=prep_time)
+        description = "Demo description"
+        instruction = """
+        1. Erste Anweisung 
+        2. Zweite Anweisung
+        3. Dritte Anweisung
+        """
+        recipe = Recipe(name=f"Recipe{i}", description=description, instruction=instruction, prep_time=prep_time)
         ingredients = []
         ing_amount = random.randint(1, 10)
         for j in range(ing_amount):
@@ -111,7 +117,7 @@ def pop_db():
                                    fat=fat,
                                    recipe=recipe)
 
-            total_kcal += ((protein*4.1) + (carbs*4.1) + (fat*9.3)) * (quantity/100)
+            total_kcal += ((protein * 4.1) + (carbs * 4.1) + (fat * 9.3)) * (quantity / 100)
 
             total_protein += protein * (quantity / 100)
 

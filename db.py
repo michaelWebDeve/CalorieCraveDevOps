@@ -25,7 +25,8 @@ class Recipe(db.Model, SerializerMixin):
 
     id = db.Column("id", db.Integer, primary_key=True)
     name = db.Column("name", db.String(100))
-    description = db.Column("description", db.String(100))
+    description = db.Column("description", db.Text)
+    instruction = db.Column("instruction", db.Text)
     prep_time = db.Column("prep_time", db.Integer)
     total_kcal = db.Column("total_kcal", db.Integer)
     total_protein = db.Column("total_protein", db.Integer)
@@ -37,6 +38,9 @@ class Recipe(db.Model, SerializerMixin):
 
     def ingredients_amount(self):
         return len(self.ingredients)
+
+    def instruction_list(self):
+        return self.instruction.split("\n")
 
 
 class RecipeIngredient(db.Model, SerializerMixin):
