@@ -34,7 +34,7 @@ def login():
         if app_user is not None:
             if app_user.pwd == pw:
                 session["email"] = email
-                return redirect(url_for("user"))
+                return redirect(url_for("index"))
             else:
                 flash("Password incorrect!", "error")
         else:
@@ -42,7 +42,7 @@ def login():
         return redirect(url_for("login"))
     else:
         if "email" in session:
-            return redirect(url_for("user"))
+            return redirect(url_for("index"))
         else:
             return render_template("login.html")
 
@@ -65,7 +65,7 @@ def register():
                 app_user = AppUser(email, pwd)
                 db.session.add(app_user)
                 db.session.commit()
-                return redirect(url_for("user"))
+                return redirect(url_for("index"))
 
     return render_template("register.html")
 
@@ -144,3 +144,8 @@ def pop_db():
         recipe_image.close()
         base_image.close()
     return "Database populated!"
+
+
+if __name__ == "__main__":
+    app.run()
+    
