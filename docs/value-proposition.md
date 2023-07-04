@@ -22,7 +22,7 @@ Linus Widing
 {:toc}
 </details>
 
-![logo](./assets/images/CC_dark.png)
+<img src="./assets/images/CC_dark.png" alt="logo" style="width: 200px;">
 
 ## Description
 - App "CalorieCrave" is a social media style **recipe app** for **fitness enthusiasts**.
