@@ -2,89 +2,85 @@
 
 {% block title %}Home{% endblock %}
 
-{% block stylesheet %}
-    <link rel="stylesheet" href="{{ url_for('static', filename='styles/home.css') }}">
-{% endblock %}
-
 {% block content %}
     <div class="row m-3">
         <div class="col-2 p-0">
-            <div class="input-group mb-3 text-secondary">
-                <div class="form-floating">
-                    <input type="number" class="form-control" id="min_kcal" placeholder="Min. kcal">
-                    <label for="min_kcal">Min. kcal</label>
+            <div class="card sticky-top bg-transparent border-0" style="top: 4rem;">
+                <div class="input-group mb-3 text-secondary">
+                    <div class="form-floating">
+                        <input type="number" class="form-control" id="min_kcal" placeholder="Min. kcal">
+                        <label for="min_kcal">Min. kcal</label>
+                    </div>
+                    <span class="input-group-text w-25 justify-content-center">kcal</span>
                 </div>
-                <span class="input-group-text w-25 justify-content-center">kcal</span>
-            </div>
 
-            <div class="input-group mb-3 text-secondary">
-                <div class="form-floating">
-                    <input type="number" class="form-control" id="max_kcal" placeholder="Max. kcal">
-                    <label for="max_kcal">Max. kcal</label>
+                <div class="input-group mb-3 text-secondary">
+                    <div class="form-floating">
+                        <input type="number" class="form-control" id="max_kcal" placeholder="Max. kcal">
+                        <label for="max_kcal">Max. kcal</label>
+                    </div>
+                    <span class="input-group-text w-25 justify-content-center">kcal</span>
                 </div>
-                <span class="input-group-text w-25 justify-content-center">kcal</span>
-            </div>
 
-            <div class="input-group mb-3 text-secondary">
-                <div class="form-floating">
-                    <input type="number" class="form-control" id="min_protein" placeholder="Min. protein">
-                    <label for="min_protein">Min. protein</label>
+                <div class="input-group mb-3 text-secondary">
+                    <div class="form-floating">
+                        <input type="number" class="form-control" id="min_protein" placeholder="Min. protein">
+                        <label for="min_protein">Min. protein</label>
+                    </div>
+                    <span class="input-group-text w-25 justify-content-center">g</span>
                 </div>
-                <span class="input-group-text w-25 justify-content-center">g</span>
-            </div>
 
-            <div class="input-group mb-3 text-secondary">
-                <div class="form-floating">
-                    <input type="number" class="form-control" id="max_prep_time" placeholder="Max. prep time">
-                    <label for="max_prep_time">Max. prep time</label>
+                <div class="input-group mb-3 text-secondary">
+                    <div class="form-floating">
+                        <input type="number" class="form-control" id="max_prep_time" placeholder="Max. prep time">
+                        <label for="max_prep_time">Max. prep time</label>
+                    </div>
+                    <span class="input-group-text w-25 justify-content-center">min</span>
                 </div>
-                <span class="input-group-text w-25 justify-content-center">min</span>
-            </div>
 
-            <div class="mb-3">
-                <div class="form-check form-switch">
-                    <input class="form-check-input" type="checkbox" id="vegetarian">
-                    <label class="form-check-label" for="vegetarian">Vegetarian</label>
+                <div class="mb-3">
+                    <div class="form-check form-switch">
+                        <input class="form-check-input" type="checkbox" id="vegetarian">
+                        <label class="form-check-label" for="vegetarian">Vegetarian</label>
+                    </div>
+                    <div class="form-check form-switch">
+                        <input class="form-check-input" type="checkbox" id="vegan">
+                        <label class="form-check-label" for="vegan">Vegan</label>
+                    </div>
+                    <div class="form-check form-switch">
+                        <input class="form-check-input" type="checkbox" id="gluten_free">
+                        <label class="form-check-label" for="gluten_free">Gluten free</label>
+                    </div>
                 </div>
-                <div class="form-check form-switch">
-                    <input class="form-check-input" type="checkbox" id="vegan">
-                    <label class="form-check-label" for="vegan">Vegan</label>
+                <div class="d-flex justify-content-between">
+                    <button type="submit" class="btn btn-primary mb-3" id="filter_btn">Filter</button>
+                    <button role="button" onclick="window.location.href='/';" class="btn btn-danger mb-3" id="filter_reset_btn">Reset</button>
                 </div>
-                <div class="form-check form-switch">
-                    <input class="form-check-input" type="checkbox" id="gluten_free">
-                    <label class="form-check-label" for="gluten_free">Gluten free</label>
-                </div>
-            </div>
-            <div class="d-flex justify-content-between">
-                <button type="submit" class="btn btn-primary mb-3" id="filter_btn">Filter</button>
-                <button role="button" onclick="window.location.href='/';" class="btn btn-danger mb-3" id="filter_reset_btn">Reset</button>
             </div>
         </div>
         <div id="recipe-container" class="col-10 px-4 m-0">
             {% for r in recipes %}
                 <div class="recipe bg-secondary mb-4 row m-0 p-4 rounded-3" style="--bs-bg-opacity: .2;">
-                    <div class="col-3 p-0">
+                    <div class="col-3">
                         <img src="{{ url_for("static", filename=r.img_path()) }}" alt="indisch" class="rounded-3 w-100 h-100" style="object-fit: cover;">
                     </div>
                     <div class="recipe_info_container col-9">
                         <h1><a class="text-white link-light" href="/recipe/{{ r.id }}" style="text-decoration: none">{{ r.name }}</a></h1>
-                        <table class="nutrition fs-4">
-                            <tr>
-                                <td class="nutrition_label text-end pe-3 text-primary">kcal</td>
+                        <table>
+                            <tr class="fs-4">
+                                <td class="nutrition_label text-end pe-3" style="color: var(--cstm_primary)">kcal</td>
                                 <td>{{ r.total_kcal }}</td>
                             </tr>
-                            <tr>
-                                <td class="nutrition_label text-end pe-3 text-primary">Protein</td>
+                            <tr class="fs-4">
+                                <td class="nutrition_label text-end pe-3" style="color: var(--cstm_primary)">Protein</td>
                                 <td>{{ r.total_protein }}g</td>
                             </tr>
-                        </table>
-                        <table>
                             <tr>
-                                <td class="tag_label text-end pe-2 text-warning">Ingredients</td>
+                                <td class="tag_label text-end pe-3" style="color: var(--cstm_secondary)">Ingredients</td>
                                 <td class="tag_value">{{ r.ingredients|length }}</td>
                             </tr>
                             <tr>
-                                <td class="tag_label text-end pe-2 text-warning">Prep time</td>
+                                <td class="tag_label text-end pe-3" style="color: var(--cstm_secondary)">Prep time</td>
                                 <td class="tag_value">{{ r.prep_time }} min</td>
                             </tr>
                         </table>
@@ -169,26 +165,24 @@
                                 </div>
                                 <div class="recipe_info_container col-9">
                                     <h1><a class="text-white link-light" href="/recipe/${recipe.id}" style="text-decoration: none">${recipe.name}</a></h1>
-                                    <table class="nutrition fs-4">
-                                        <tr>
-                                            <td class="nutrition_label text-end pe-3 text-primary">kcal</td>
-                                            <td>${recipe.total_kcal}</td>
-                                        </tr>
-                                        <tr>
-                                            <td class="nutrition_label text-end pe-3 text-primary">Protein</td>
-                                            <td>${recipe.total_protein}g</td>
-                                        </tr>
-                                    </table>
                                     <table>
-                                        <tr>
-                                            <td class="tag_label text-end pe-2 text-warning">Ingredients</td>
-                                    <td class="tag_value">${recipe.ingredients_amount}</td>
-                                        </tr>
-                                        <tr>
-                                            <td class="tag_label text-end pe-2 text-warning">Prep time</td>
-                                            <td class="tag_value">${recipe.prep_time} min</td>
-                                        </tr>
-                                    </table>
+                            <tr class="fs-4">
+                                <td class="nutrition_label text-end pe-3" style="color: var(--cstm_primary)">kcal</td>
+                                <td>${recipe.total_kcal}</td>
+                            </tr>
+                            <tr class="fs-4">
+                                <td class="nutrition_label text-end pe-3" style="color: var(--cstm_primary)">Protein</td>
+                                <td>${recipe.total_protein}g</td>
+                            </tr>
+                            <tr>
+                                <td class="tag_label text-end pe-3" style="color: var(--cstm_secondary)">Ingredients</td>
+                                <td class="tag_value">${recipe.ingredients_amount}</td>
+                            </tr>
+                            <tr>
+                                <td class="tag_label text-end pe-3" style="color: var(--cstm_secondary)">Prep time</td>
+                                <td class="tag_value">${recipe.prep_time} min</td>
+                            </tr>
+                        </table>
                                 </div>
                             </div>
                         `;
