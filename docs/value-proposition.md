@@ -22,16 +22,16 @@ Linus Widing
 {:toc}
 </details>
 
+![logo](./assets/images/cc_dark.png)
+
 ## Description
-Die App "CalorieCrave" ist eine Rezept-App im Social-Media-Style für Fitness-Enthusiasten. 
-Die Kernfunktionen umfassen eine For-You-Page, auf der Rezepte mit Nährwertangaben (kcal, Makros usw.) in einer scrollbaren Seite wie bei Instagram angezeigt werden.
-Die Gerichte werden einfach und direkt mit den wichtigsten Informationen angezeigt, und es gibt eine Filterfunktion, mit der Nutzer nach kcal und Makros filtern können. 
-Beiträge stammen von verschiedenen Usern, die nicht nur Gourmet-Gerichte, sondern auch einfache Gerichte mit korrekten Nährwerten posten. Die Nutzer können ein eigenes Profil erstellen und Favoriten speichern sowie Listen für Bulk oder Diät erstellen. 
-Optional gibt es auch eine Trackingfunktion.
-Dabei soll die App für 20- bis 30-Jährige ansprechend designt sein und möglich intuitiv in der Bedienung. 
-Daher auch die "For-You-Page" Funktion, da junge Menschen mit Social Media fast rund die Uhr in Kontakt sind und das Bedienen einer solchen "For-You-Page" sehr intuitiv ist.
-
-
+- App "CalorieCrave" is a social media style **recipe app** for **fitness enthusiasts**.
+- Core features include a **scrollable "For-You-Page"** with recipes and nutritional information (kcal, macros, etc.)
+- Simple and direct display of dishes with important information
+- **Filter function** allows filtering by kcal and macros
+- **Contributions** come from different **users** with gourmet and simple dishes with correct nutritional values
+- Users can create a profile, **save favorites** and create bulk or diet lists
+- App is **attractively designed** for 20- to 30-year-olds and intuitive to use
 
 
 ## Persona
