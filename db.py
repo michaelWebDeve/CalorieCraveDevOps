@@ -30,6 +30,9 @@ class Recipe(db.Model, SerializerMixin):
     prep_time = db.Column("prep_time", db.Integer)
     total_kcal = db.Column("total_kcal", db.Integer)
     total_protein = db.Column("total_protein", db.Integer)
+    vegetarian = db.Column("vegetarian", db.Boolean)
+    vegan = db.Column("vegan", db.Boolean)
+    gluten_free = db.Column("gluten_free", db.Boolean)
 
     ingredients = db.relationship('RecipeIngredient', backref='recipe')
 
