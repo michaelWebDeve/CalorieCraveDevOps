@@ -60,7 +60,7 @@
         </div>
         <div id="recipe-container" class="col-10 px-4 m-0">
             {% for r in recipes %}
-                <div class="recipe bg-secondary mb-4 row m-0 p-4 rounded-3" style="--bs-bg-opacity: .2;">
+                <div class="recipe bg-secondary mb-4 row m-0 p-4 rounded-3 bg-opaque bg-secondary">
                     <div class="col-3">
                         <img src="{{ url_for("static", filename=r.img_path()) }}" alt="indisch" class="rounded-3 w-100 h-100" style="object-fit: cover;">
                     </div>
@@ -68,19 +68,19 @@
                         <h1><a class="text-white link-light" href="/recipe/{{ r.id }}" style="text-decoration: none">{{ r.name }}</a></h1>
                         <table>
                             <tr class="fs-4">
-                                <td class="nutrition_label text-end pe-3" style="color: var(--cstm_primary)">kcal</td>
+                                <td class="nutrition_label text-end pe-3 text-primary-custom">kcal</td>
                                 <td>{{ r.total_kcal }}</td>
                             </tr>
                             <tr class="fs-4">
-                                <td class="nutrition_label text-end pe-3" style="color: var(--cstm_primary)">Protein</td>
+                                <td class="nutrition_label text-end pe-3 text-primary-custom">Protein</td>
                                 <td>{{ r.total_protein }}g</td>
                             </tr>
                             <tr>
-                                <td class="tag_label text-end pe-3" style="color: var(--cstm_secondary)">Ingredients</td>
+                                <td class="tag_label text-end pe-3 text-secondary-custom">Ingredients</td>
                                 <td class="tag_value">{{ r.ingredients|length }}</td>
                             </tr>
                             <tr>
-                                <td class="tag_label text-end pe-3" style="color: var(--cstm_secondary)">Prep time</td>
+                                <td class="tag_label text-end pe-3 text-secondary-custom">Prep time</td>
                                 <td class="tag_value">{{ r.prep_time }} min</td>
                             </tr>
                         </table>
@@ -159,7 +159,7 @@
                             // Create a new recipe element
                             const recipeElement = document.createElement('div');
                             const recipeContent = `
-                            <div class="recipe bg-secondary mb-4 row m-0 p-4 rounded-3" style="--bs-bg-opacity: .2;">
+                            <div class="recipe bg-secondary mb-4 row m-0 p-4 rounded-3 bg-opaque bg-secondary">
                                 <div class="col-3">
                                     <img src="/static/${recipe.img_path}" alt="indisch" class="rounded-3 w-100 h-100" style="object-fit: cover;">
                                 </div>
@@ -167,19 +167,19 @@
                                     <h1><a class="text-white link-light" href="/recipe/${recipe.id}" style="text-decoration: none">${recipe.name}</a></h1>
                                     <table>
                             <tr class="fs-4">
-                                <td class="nutrition_label text-end pe-3" style="color: var(--cstm_primary)">kcal</td>
+                                <td class="nutrition_label text-end pe-3 text-primary-custom">kcal</td>
                                 <td>${recipe.total_kcal}</td>
                             </tr>
                             <tr class="fs-4">
-                                <td class="nutrition_label text-end pe-3" style="color: var(--cstm_primary)">Protein</td>
+                                <td class="nutrition_label text-end pe-3 text-primary-custom" style="color: var(--cstm_primary)">Protein</td>
                                 <td>${recipe.total_protein}g</td>
                             </tr>
                             <tr>
-                                <td class="tag_label text-end pe-3" style="color: var(--cstm_secondary)">Ingredients</td>
+                                <td class="tag_label text-end pe-3 text-secondary-custom">Ingredients</td>
                                 <td class="tag_value">${recipe.ingredients_amount}</td>
                             </tr>
                             <tr>
-                                <td class="tag_label text-end pe-3" style="color: var(--cstm_secondary)">Prep time</td>
+                                <td class="tag_label text-end pe-3 text-secondary-custom">Prep time</td>
                                 <td class="tag_value">${recipe.prep_time} min</td>
                             </tr>
                         </table>
