@@ -17,7 +17,6 @@ app.register_blueprint(api, url_prefix="/api")
 
 @app.route('/')
 def index():
-    db.create_all()
     if "email" in session:
         return render_template("home.html")
     return redirect(url_for("login"))
@@ -100,6 +99,16 @@ def get_recipe(recipe_id):
 
 @app.route("/populate-db")
 def pop_db():
+    if os.path.exists("./static/instance"):
+        print("exists")
+        if os.path.exists("./static/instance/images"):
+            print("exists")
+        else:
+            os.mkdir("./static/instance/images")
+    else:
+        os.mkdir("./static/instance")
+        os.mkdir("./static/instance/images")
+
     for i in range(35):
         base_image = open("static/images/base.jpg", "rb")
         total_kcal = 0
@@ -111,6 +120,9 @@ def pop_db():
         2. Zweite Anweisung
         3. Dritte Anweisung
         """
+        vegetarian = bool(random.randint(0, 1))
+        vegan = bool(random.randint(0, 1))
+        gluten_free = bool(random.randint(0, 1))
         recipe = Recipe(name=f"Recipe{i}", description=description, instruction=instruction, prep_time=prep_time)
         ingredients = []
         ing_amount = random.randint(1, 10)
@@ -132,6 +144,9 @@ def pop_db():
 
             ingredients.append(ing)
 
+        recipe.vegan = vegan
+        recipe.vegetarian = vegetarian
+        recipe.gluten_free = gluten_free
         recipe.total_kcal = int(total_kcal)
         recipe.total_protein = int(total_protein)
         db.session.add(recipe)
@@ -145,6 +160,6 @@ def pop_db():
     return "Database populated!"
 
 
-if __name__ == "__main__":
-    app.run()
-    
+@app.before_request
+def create_database():
+    db.create_all()
