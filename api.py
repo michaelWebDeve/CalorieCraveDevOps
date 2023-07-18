@@ -6,7 +6,6 @@ api = Blueprint("api", __name__)
 
 @api.route("/recipes/")
 def fetch_recipes():
-
     recipes = Recipe.query.order_by(Recipe.id)
     if "min_kcal" in request.args:
         min_kcal = int(request.args.get("min_kcal"))
@@ -23,6 +22,15 @@ def fetch_recipes():
     if "max_prep_time" in request.args:
         max_prep_time = int(request.args.get("max_prep_time"))
         recipes = recipes.filter(Recipe.prep_time < max_prep_time)
+
+    if "vegan" in request.args:
+        recipes = recipes.filter(Recipe.vegan)
+
+    if "vegetarian" in request.args:
+        recipes = recipes.filter(Recipe.vegetarian)
+
+    if "gluten_free" in request.args:
+        recipes = recipes.filter(Recipe.gluten_free)
 
     if ("limit" and "counter") in request.args:
         limit = int(request.args.get("limit"))

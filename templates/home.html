@@ -114,6 +114,15 @@
             if (max_prep_time) {
                 query_str = query_str + "&max_prep_time=" + max_prep_time;
             }
+            if(vegetarian) {
+                query_str = query_str + "&vegetarian=" + vegetarian;
+            }
+            if(vegan) {
+                query_str = query_str + "&vegan=" + vegan;
+            }
+            if(gluten_free) {
+                query_str = query_str + "&gluten_free=" + gluten_free;
+            }
             flushContent();
             counter = 1;
             end = false;
