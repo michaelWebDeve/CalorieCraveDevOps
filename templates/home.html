@@ -54,50 +54,43 @@
                 </div>
                 <div class="d-flex justify-content-between">
                     <button type="submit" class="btn btn-primary mb-3" id="filter_btn">Filter</button>
-                    <button role="button" onclick="window.location.href='/';" class="btn btn-danger mb-3" id="filter_reset_btn">Reset</button>
+                    <button role="button" onclick="window.location.href='/';" class="btn btn-danger mb-3"
+                            id="filter_reset_btn">Reset
+                    </button>
                 </div>
             </div>
         </div>
         <div id="recipe-container" class="col-10 px-4 m-0">
-            {% for r in recipes %}
-                <div class="recipe bg-secondary mb-4 row m-0 p-4 rounded-3 bg-opaque bg-secondary">
-                    <div class="col-3">
-                        <img src="{{ url_for("static", filename=r.img_path()) }}" alt="indisch" class="rounded-3 w-100 h-100" style="object-fit: cover;">
-                    </div>
-                    <div class="recipe_info_container col-9">
-                        <h1><a class="text-white link-light" href="/recipe/{{ r.id }}" style="text-decoration: none">{{ r.name }}</a></h1>
-                        <table>
-                            <tr class="fs-4">
-                                <td class="nutrition_label text-end pe-3 text-primary-custom">kcal</td>
-                                <td>{{ r.total_kcal }}</td>
-                            </tr>
-                            <tr class="fs-4">
-                                <td class="nutrition_label text-end pe-3 text-primary-custom">Protein</td>
-                                <td>{{ r.total_protein }}g</td>
-                            </tr>
-                            <tr>
-                                <td class="tag_label text-end pe-3 text-secondary-custom">Ingredients</td>
-                                <td class="tag_value">{{ r.ingredients|length }}</td>
-                            </tr>
-                            <tr>
-                                <td class="tag_label text-end pe-3 text-secondary-custom">Prep time</td>
-                                <td class="tag_value">{{ r.prep_time }} min</td>
-                            </tr>
-                        </table>
-                    </div>
-                </div>
-            {% endfor %}
         </div>
     </div>
 
 {% endblock %}
 
 {% block scripts %}
-
     <script type="text/javascript">
+        var counter = 1;
+        var limit = 10;
+        var end = false;
 
+        // initialize home page
+        downloadContent(counter, limit, "")
+
+
+        
+        // Scroll listener
+        $(window).scroll(() => {
+            var current_y = Math.floor($(window).scrollTop());
+            var window_height = Math.floor($(window).height());
+            var document_height = Math.floor($(document).height());
+            if (current_y + window_height === document_height) {
+                counter += 1;
+                downloadContent(counter, limit, query_str)
+            }
+        });
+
+        // Filter Button listener
         var query_str = "";
-        $("#filter_btn").on("click", function (){
+        $("#filter_btn").on("click", function () {
             query_str = "";
 
             var min_kcal = $("#min_kcal").val();
@@ -108,57 +101,41 @@
             var vegan = $("#vegan").is(":checked");
             var gluten_free = $("#gluten_free").is(":checked");
 
-            console.log("min kcal: " + min_kcal + " " +
-                "max kcal: " + max_kcal + " " +
-                "min protein: " + min_protein + " " +
-                "vegetarian: " + vegetarian + " " +
-                "vegan: " + vegan + " " +
-                "gluten free: " + gluten_free);
-            if(min_kcal){
-                query_str = query_str + "&min_kcal="+min_kcal;
+
+            if (min_kcal) {
+                query_str = query_str + "&min_kcal=" + min_kcal;
             }
-            if(max_kcal){
-                query_str = query_str + "&max_kcal="+max_kcal;
+            if (max_kcal) {
+                query_str = query_str + "&max_kcal=" + max_kcal;
             }
-            if(min_protein){
-                query_str = query_str + "&min_protein="+min_protein;
+            if (min_protein) {
+                query_str = query_str + "&min_protein=" + min_protein;
             }
-            if(max_prep_time){
-                query_str = query_str + "&max_prep_time="+max_prep_time;
+            if (max_prep_time) {
+                query_str = query_str + "&max_prep_time=" + max_prep_time;
             }
             flushContent();
             counter = 1;
             end = false;
             downloadContent(counter, limit, query_str)
         });
-    </script>
 
-    <script type="text/javascript">
-        var counter = 1;
-        var limit = 10;
-        var end = false;
 
-        $(window).scroll(() => {
-            var current_y = Math.floor($(window).scrollTop());
-            var window_height = Math.floor($(window).height());
-            var document_height = Math.floor($(document).height());
-            if (current_y + window_height === document_height) {
-                counter += 1;
-                downloadContent(counter, 10,query_str)
-            }
-        });
 
-        function flushContent(){
+
+        // Function to remove all recipes
+        function flushContent() {
             $("#recipe-container").empty();
         }
 
+        // Function to query recipes from API and append them to the page
         function downloadContent(counter, limit, query_str) {
-                if (!end) {
-                    $.get("/api/recipes/?counter=" + counter + "&limit=" + limit + query_str, function (data) {
-                        data.forEach(recipe => {
-                            // Create a new recipe element
-                            const recipeElement = document.createElement('div');
-                            const recipeContent = `
+            if (!end) {
+                $.get("/api/recipes/?counter=" + counter + "&limit=" + limit + query_str, function (data) {
+                    data.forEach(recipe => {
+                        // Create a new recipe element
+                        const recipeElement = document.createElement('div');
+                        const recipeContent = `
                             <div class="recipe bg-secondary mb-4 row m-0 p-4 rounded-3 bg-opaque bg-secondary">
                                 <div class="col-3">
                                     <img src="/static/${recipe.img_path}" alt="indisch" class="rounded-3 w-100 h-100" style="object-fit: cover;">
@@ -187,26 +164,26 @@
                             </div>
                         `;
 
-                            // Set the HTML content of the recipe element
-                            recipeElement.innerHTML = recipeContent;
+                        // Set the HTML content of the recipe element
+                        recipeElement.innerHTML = recipeContent;
 
-                            // Append the recipe element to the container
-                            const container = document.getElementById('recipe-container');
-                            container.appendChild(recipeElement);
-                        });
-                    }).fail(function () {
+                        // Append the recipe element to the container
                         const container = document.getElementById('recipe-container');
-                        const endElement = document.createElement('div');
-                        endElement.innerHTML = `
+                        container.appendChild(recipeElement);
+                    });
+                }).fail(function () {
+                    const container = document.getElementById('recipe-container');
+                    const endElement = document.createElement('div');
+                    endElement.innerHTML = `
                             <div class="d-flex justify-content-center">
                                 <p class="fs-5 text-secondary">No more recipes!</p>
                             </div>
                         `
-                        container.appendChild(endElement);
-                        end = true;
-                    });
-                }
+                    container.appendChild(endElement);
+                    end = true;
+                });
             }
+        }
     </script>
 
 {% endblock %}

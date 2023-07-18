@@ -18,9 +18,8 @@ app.register_blueprint(api, url_prefix="/api")
 @app.route('/')
 def index():
     db.create_all()
-    recipes = Recipe.query.order_by(Recipe.id).limit(10).all()
     if "email" in session:
-        return render_template("home.html", recipes=recipes)
+        return render_template("home.html")
     return redirect(url_for("login"))
 
 
