@@ -209,6 +209,9 @@ def pop_db():
         base_image.close()
     return "Database populated!"
 
+@app.route("/test")
+def test():
+    return render_template("create_recipe.html")
 
 @app.before_request
 def create_database():

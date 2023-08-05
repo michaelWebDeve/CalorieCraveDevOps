@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+
+{% block title %}Create Recipe{% endblock %}
+
+{% block content %}
+
+    <div class="mb-3">
+        <label for="formFile" class="form-label">Default file input example</label>
+        <input class="form-control" type="file" id="formFile">
+    </div>
+    <div class="mb-3">
+        <label for="namInput" class="form-label">Recipe name</label>
+        <input type="text" class="form-control" id="namInput" placeholder="Recipe name">
+    </div>
+    <div class="mb-3">
+        <label for="exampleFormControlTextarea1" class="form-label">Example textarea</label>
+        <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+    </div>
+{% endblock %}
