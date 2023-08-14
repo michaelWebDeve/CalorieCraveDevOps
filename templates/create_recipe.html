@@ -35,7 +35,8 @@
                     </div>
                     <div class="input-group mb-3 text-secondary">
                         <div class="form-floating">
-                            <input type="number" class="form-control" id="ing_amount_used" placeholder="Used amount">
+                            <input type="number" class="form-control ing-input" id="ing_amount_used"
+                                   placeholder="Used amount">
                             <label for="ing_amount_used">Used amount</label>
                         </div>
                         <span class="input-group-text w-25 justify-content-center">g</span>
@@ -44,21 +45,21 @@
                 <div class="col-6 ps-3">
                     <div class="input-group mb-3 text-secondary">
                         <div class="form-floating">
-                            <input type="number" class="form-control" id="ing_carbs" placeholder="Carbs">
+                            <input type="number" class="form-control ing-input" id="ing_carbs" placeholder="Carbs">
                             <label for="ing_carbs">Carbs</label>
                         </div>
                         <span class="input-group-text w-25 justify-content-center">per 100g</span>
                     </div>
                     <div class="input-group mb-3 text-secondary">
                         <div class="form-floating">
-                            <input type="number" class="form-control" id="ing_fat" placeholder="Fat">
+                            <input type="number" class="form-control ing-input" id="ing_fat" placeholder="Fat">
                             <label for="ing_fat">Fat</label>
                         </div>
                         <span class="input-group-text w-25 justify-content-center">per 100g</span>
                     </div>
                     <div class="input-group mb-3 text-secondary">
                         <div class="form-floating">
-                            <input type="number" class="form-control" id="ing_protein" placeholder="Protein">
+                            <input type="number" class="form-control ing-input" id="ing_protein" placeholder="Protein">
                             <label for="ing_protein">Protein</label>
                         </div>
                         <span class="input-group-text w-25 justify-content-center">per 100g</span>
@@ -68,8 +69,8 @@
 
             <div class="d-flex flex-row">
                 <div class="w-50">
-                    <h2 class="text-primary-custom">500 kcal total</h2>
-                    <h4 class="text-secondary-custom">120 kcal per 100g</h4>
+                    <h2 class="text-primary-custom" id="kcal-output-total">0 kcal total</h2>
+                    <h4 class="text-secondary-custom" id="kcal-output-100g">0 kcal on 100g</h4>
                 </div>
                 <div class="w-50 ps-3">
                     <div class="d-flex justify-content-between">
@@ -102,15 +103,19 @@
             </div>
         </div>
     </div>
+    <button class="btn btn-primary" id="finish_button">FINISH</button>
 {% endblock %}
 
 {% block scripts %}
     <script type="text/javascript">
         var maxH = $('#ing_container').css("height");
-        console.log(maxH);
         $('#ing_container').css({"maxHeight": maxH});
         var ings = [];
+    </script>
 
+    <!--Listener-->
+    <script type="text/javascript">
+        // Ingredient input change listener
         $("#add_ing_button").on("click", function () {
             var ing_name = $("#ing_name").val();
             var ing_brand = $("#ing_brand").val();
@@ -125,7 +130,102 @@
             addIngredient(ing)
         });
 
+        // Ingredient input change listener
+        $(".ing-input").on("change", function () {
+            var ing_carbs = $("#ing_carbs").val();
+            console.log(ing_carbs);
+            var ing_fat = $("#ing_fat").val();
+            var ing_protein = $("#ing_protein").val();
+            var ing_amount_used = $("#ing_amount_used").val();
+            try{
+                var kcal = Math.round(calcKcal(ing_carbs, ing_protein, ing_fat));
+                var kcal_total = Math.round(kcal*(ing_amount_used/100));
+                if(!(isNaN(kcal))){
+                    $("#kcal-output-100g").html(kcal+" kcal on 100g");
+                    if(ing_amount_used!==""){
+                        $("#kcal-output-total").html(kcal_total+" kcal total");
+                    }
+                }
+            }catch (e){
+                console.log("ERROR");
+            }
+        });
 
+        // Ingredient delete button listener
+        $(document).on("click", ".delete-button", function () {
+            const index = $(this).closest(".ingredient-element").index();
+            console.log(index);
+
+            ings.splice(index, 1);
+
+            $(this).closest(".ingredient-element").remove();
+            console.log(ings)
+        });
+
+        // Finish button listener
+        $("#finish_button").on("click", function () {
+            const jsonings = JSON.stringify(ings)
+            console.log(jsonings);
+
+            $.ajax({
+                type: "POST", // Use the appropriate HTTP method
+                url: "/api/recipes", // Replace with your actual endpoint URL
+                data: jsonings,
+                contentType: "application/json", // Set the content type to JSON
+                success: function (response) {
+                    // Handle success response from the server
+                    console.log("Data sent successfully", response);
+                },
+                error: function (error) {
+                    // Handle error response from the server
+                    console.error("Error sending data", error);
+                }
+            });
+
+        });
+    </script>
+
+    <!--Data classes-->
+    <script type="text/javascript">
+        class Ingredient {
+            ing_name;
+            ing_brand;
+            ing_carbs;
+            ing_fat;
+            ing_protein;
+            ing_amount_used;
+
+            constructor(ing_name, ing_brand, ing_carbs, ing_fat, ing_protein, ing_amount_used) {
+                this.ing_name = ing_name;
+                this.ing_brand = ing_brand;
+                this.ing_carbs = ing_carbs;
+                this.ing_fat = ing_fat;
+                this.ing_protein = ing_protein;
+                this.ing_amount_used = ing_amount_used;
+            }
+
+            toString() {
+                return "ing_name: " + ing_name;
+            }
+
+            calcKcal() {
+                var total = 0;
+                total = total + this.ing_carbs * 4;
+                total = total + this.ing_protein * 4;
+                total = total + this.ing_fat * 9;
+                total = total * (this.ing_amount_used / 100);
+                return Math.round(total);
+            }
+
+            calcProtein() {
+                return Math.round(this.ing_protein * (this.ing_amount_used / 100));
+            }
+
+        }
+    </script>
+
+    <!--Functions-->
+    <script type="text/javascript">
         function addIngredient(ing) {
             const ingElement = document.createElement('div');
             const ingContent = `
@@ -159,58 +259,12 @@
             container.appendChild(ingElement);
         }
 
-
-        class Ingredient {
-            ing_name;
-            ing_brand;
-            ing_carbs;
-            ing_fat;
-            ing_protein;
-            ing_amount_used;
-
-            constructor(ing_name, ing_brand, ing_carbs, ing_fat, ing_protein, ing_amount_used) {
-                this.ing_name = ing_name;
-                this.ing_brand = ing_brand;
-                this.ing_carbs = ing_carbs;
-                this.ing_fat = ing_fat;
-                this.ing_protein = ing_protein;
-                this.ing_amount_used = ing_amount_used;
-            }
-
-            toString() {
-                return "ing_name: " + ing_name;
-            }
-
-            calcKcal() {
-                var total = 0;
-                total = total + this.ing_carbs * 4;
-                total = total + this.ing_protein * 4;
-                total = total + this.ing_fat * 9;
-                total = total * (this.ing_amount_used / 100);
-                return Math.round(total);
-            }
-
-            calcProtein(){
-                return Math.round(this.ing_protein*(this.ing_amount_used/100));
-            }
-
+        function calcKcal(carbs, protein, fat) {
+            var total = 0;
+            total = total + carbs * 4;
+            total = total + protein * 4;
+            total = total + fat * 9;
+            return total;
         }
-    </script>
-
-    <script type="text/javascript">
-        console.log("askjdopaksd");
-        // Listen for delete button clicks
-        $(document).on("click", ".delete-button", function () {
-            // Get the index of the ingredient element that needs to be deleted
-            const index = $(this).closest(".ingredient-element").index();
-
-            // Remove the ingredient from the ings list
-            ings.splice(index, 1);
-
-            // Remove the ingredient element from the DOM
-            $(this).closest(".ingredient-element").remove();
-            console.log(ings)
-        });
-
     </script>
 {% endblock %}
