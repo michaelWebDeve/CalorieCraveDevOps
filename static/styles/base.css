@@ -2,6 +2,7 @@
     --cstm_bg: #222431;
     --cstm_fg_50: rgba(255, 255, 255, 0.1);
     --cstm_fg_100: #3a3b44;
+    --light_grey: #9d9d9d;
     --cstm_primary: #4282f6;
     --cstm_secondary: #ec9f4a;
 }
@@ -21,6 +22,10 @@ body {
 
 .text-secondary-custom {
     color: var(--cstm_secondary);
+}
+
+.text-light-grey{
+    color: var(--light_grey);
 }
 
 .bg-opaque{
