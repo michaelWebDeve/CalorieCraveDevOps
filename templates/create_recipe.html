@@ -3,17 +3,214 @@
 {% block title %}Create Recipe{% endblock %}
 
 {% block content %}
-
-    <div class="mb-3">
-        <label for="formFile" class="form-label">Default file input example</label>
-        <input class="form-control" type="file" id="formFile">
-    </div>
+    <h2>Describe Recipe</h2>
     <div class="mb-3">
         <label for="namInput" class="form-label">Recipe name</label>
         <input type="text" class="form-control" id="namInput" placeholder="Recipe name">
     </div>
     <div class="mb-3">
-        <label for="exampleFormControlTextarea1" class="form-label">Example textarea</label>
-        <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+        <textarea class="form-control" aria-label="With textarea" placeholder="Recipe Description"></textarea>
     </div>
+    <div class="mb-3">
+        <label for="formFile" class="form-label">Default file input example</label>
+        <input class="form-control" type="file" id="formFile">
+    </div>
+
+    <div class="d-flex flex-row">
+        <div class="col w-50 pe-3">
+            <h2>Add Ingredient</h2>
+            <div class="d-flex flex-row">
+                <div class="col-6 pe-3">
+                    <div class="input-group mb-3 text-secondary">
+                        <div class="form-floating">
+                            <input type="text" class="form-control" id="ing_name" placeholder="Ingredient name">
+                            <label for="ing_name">Ingredient name</label>
+                        </div>
+                    </div>
+                    <div class="input-group mb-3 text-secondary">
+                        <div class="form-floating">
+                            <input type="text" class="form-control" id="ing_brand" placeholder="Ingredient brand">
+                            <label for="ing_brand">Ingredient brand</label>
+                        </div>
+                    </div>
+                    <div class="input-group mb-3 text-secondary">
+                        <div class="form-floating">
+                            <input type="number" class="form-control" id="ing_amount_used" placeholder="Used amount">
+                            <label for="ing_amount_used">Used amount</label>
+                        </div>
+                        <span class="input-group-text w-25 justify-content-center">g</span>
+                    </div>
+                </div>
+                <div class="col-6 ps-3">
+                    <div class="input-group mb-3 text-secondary">
+                        <div class="form-floating">
+                            <input type="number" class="form-control" id="ing_carbs" placeholder="Carbs">
+                            <label for="ing_carbs">Carbs</label>
+                        </div>
+                        <span class="input-group-text w-25 justify-content-center">per 100g</span>
+                    </div>
+                    <div class="input-group mb-3 text-secondary">
+                        <div class="form-floating">
+                            <input type="number" class="form-control" id="ing_fat" placeholder="Fat">
+                            <label for="ing_fat">Fat</label>
+                        </div>
+                        <span class="input-group-text w-25 justify-content-center">per 100g</span>
+                    </div>
+                    <div class="input-group mb-3 text-secondary">
+                        <div class="form-floating">
+                            <input type="number" class="form-control" id="ing_protein" placeholder="Protein">
+                            <label for="ing_protein">Protein</label>
+                        </div>
+                        <span class="input-group-text w-25 justify-content-center">per 100g</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="d-flex flex-row">
+                <div class="w-50">
+                    <h2 class="text-primary-custom">500 kcal total</h2>
+                    <h4 class="text-secondary-custom">120 kcal per 100g</h4>
+                </div>
+                <div class="w-50 ps-3">
+                    <div class="d-flex justify-content-between">
+                        <div>
+                            <div class="form-check form-switch">
+                                <input class="form-check-input" type="checkbox" id="vegetarian">
+                                <label class="form-check-label" for="vegetarian">Vegetarian</label>
+                            </div>
+                            <div class="form-check form-switch">
+                                <input class="form-check-input" type="checkbox" id="vegan">
+                                <label class="form-check-label" for="vegan">Vegan</label>
+                            </div>
+                            <div class="form-check form-switch">
+                                <input class="form-check-input" type="checkbox" id="gluten_free">
+                                <label class="form-check-label" for="gluten_free">Gluten free</label>
+                            </div>
+                        </div>
+
+                        <div class="d-flex align-items-center">
+                            <button class="btn btn-primary" id="add_ing_button">Add Ingredient</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col w-50 ps-3">
+            <h2>Ingredients</h2>
+            <div class="w-100 h-100 rounded-3 p-2 border border-primary overflow-scroll" id="ing_container">
+
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block scripts %}
+    <script type="text/javascript">
+        var maxH = $('#ing_container').css("height");
+        console.log(maxH);
+        $('#ing_container').css({"maxHeight": maxH});
+        var ings = [];
+
+        $("#add_ing_button").on("click", function () {
+            var ing_name = $("#ing_name").val();
+            var ing_brand = $("#ing_brand").val();
+            var ing_carbs = $("#ing_carbs").val();
+            var ing_fat = $("#ing_fat").val();
+            var ing_protein = $("#ing_protein").val();
+            var ing_amount_used = $("#ing_amount_used").val();
+            const ing = new Ingredient(ing_name, ing_brand, ing_carbs, ing_fat, ing_protein, ing_amount_used);
+            ings.push(ing);
+            console.log(ing.calcKcal());
+            console.log(ings);
+            addIngredient(ing)
+        });
+
+
+        function addIngredient(ing) {
+            const ingElement = document.createElement('div');
+            const ingContent = `
+                            <div class="w-100 mb-2 rounded-3 bg-opaque bg-secondary p-2 d-flex justify-content-between">
+                            <div>
+                                <p class="m-0"><b>${ing.ing_name}</b></p>
+                                <p class="m-0 text-light-grey"><i>${ing.ing_brand}, ${ing.ing_amount_used}g</i></p>
+                            </div>
+                            <div class="d-flex flex-row">
+                                <div class="text-end">
+                                    <p class="m-0 text-primary-custom"><b>${ing.calcKcal()} kcal</b></p>
+                                    <p class="m-0 text-secondary-custom"><b><i>${ing.calcProtein()}g protein</i></b></p>
+                                </div>
+                                <div class="d-flex justify-content-center align-items-center ms-2">
+                                    <button class="btn btn-danger delete-button">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                                             class="bi bi-trash3" viewBox="0 0 16 16">
+                                            <path d="M6.5 1h3a.5.5 0 0 1 .5.5v1H6v-1a.5.5 0 0 1 .5-.5ZM11 2.5v-1A1.5 1.5 0 0 0 9.5 0h-3A1.5 1.5 0 0 0 5 1.5v1H2.506a.58.58 0 0 0-.01 0H1.5a.5.5 0 0 0 0 1h.538l.853 10.66A2 2 0 0 0 4.885 16h6.23a2 2 0 0 0 1.994-1.84l.853-10.66h.538a.5.5 0 0 0 0-1h-.995a.59.59 0 0 0-.01 0H11Zm1.958 1-.846 10.58a1 1 0 0 1-.997.92h-6.23a1 1 0 0 1-.997-.92L3.042 3.5h9.916Zm-7.487 1a.5.5 0 0 1 .528.47l.5 8.5a.5.5 0 0 1-.998.06L5 5.03a.5.5 0 0 1 .47-.53Zm5.058 0a.5.5 0 0 1 .47.53l-.5 8.5a.5.5 0 1 1-.998-.06l.5-8.5a.5.5 0 0 1 .528-.47ZM8 4.5a.5.5 0 0 1 .5.5v8.5a.5.5 0 0 1-1 0V5a.5.5 0 0 1 .5-.5Z"></path>
+                                        </svg>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                        `;
+            ingElement.classList.add('ingredient-element');
+            // Set the HTML content of the recipe element
+            ingElement.innerHTML = ingContent;
+
+            // Append the recipe element to the container
+            const container = document.getElementById('ing_container');
+            container.appendChild(ingElement);
+        }
+
+
+        class Ingredient {
+            ing_name;
+            ing_brand;
+            ing_carbs;
+            ing_fat;
+            ing_protein;
+            ing_amount_used;
+
+            constructor(ing_name, ing_brand, ing_carbs, ing_fat, ing_protein, ing_amount_used) {
+                this.ing_name = ing_name;
+                this.ing_brand = ing_brand;
+                this.ing_carbs = ing_carbs;
+                this.ing_fat = ing_fat;
+                this.ing_protein = ing_protein;
+                this.ing_amount_used = ing_amount_used;
+            }
+
+            toString() {
+                return "ing_name: " + ing_name;
+            }
+
+            calcKcal() {
+                var total = 0;
+                total = total + this.ing_carbs * 4;
+                total = total + this.ing_protein * 4;
+                total = total + this.ing_fat * 9;
+                total = total * (this.ing_amount_used / 100);
+                return Math.round(total);
+            }
+
+            calcProtein(){
+                return Math.round(this.ing_protein*(this.ing_amount_used/100));
+            }
+
+        }
+    </script>
+
+    <script type="text/javascript">
+        console.log("askjdopaksd");
+        // Listen for delete button clicks
+        $(document).on("click", ".delete-button", function () {
+            // Get the index of the ingredient element that needs to be deleted
+            const index = $(this).closest(".ingredient-element").index();
+
+            // Remove the ingredient from the ings list
+            ings.splice(index, 1);
+
+            // Remove the ingredient element from the DOM
+            $(this).closest(".ingredient-element").remove();
+            console.log(ings)
+        });
+
+    </script>
 {% endblock %}
