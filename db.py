@@ -24,6 +24,7 @@ class Recipe(db.Model, SerializerMixin):
     serialize_rules = ("-ingredients.recipe",)
 
     id = db.Column("id", db.Integer, primary_key=True)
+    created_by = db.Column(db.Integer, db.ForeignKey("app_user.id"))  # fk aus user Tabelle
     name = db.Column("name", db.String(100))
     description = db.Column("description", db.Text)
     instruction = db.Column("instruction", db.Text)
@@ -56,3 +57,21 @@ class RecipeIngredient(db.Model, SerializerMixin):
     protein = db.Column("protein", db.Integer)
     quantity = db.Column("quantity", db.Integer)
     recipe_id = db.Column(db.Integer, db.ForeignKey("recipe.id"))
+
+
+class FavouriteRecipe(db.Model, SerializerMixin):
+    __tablename__ = "favourite_recipes"
+    # fk zusammensetzen zu einer pk
+    user_id = db.Column(db.Integer, db.ForeignKey("app_user.id"), primary_key=True)
+    recipe_id = db.Column(db.Integer, db.ForeignKey("recipe.id"), primary_key=True)
+
+    user = db.relationship("AppUser", backref="favourite_recipes")  # new column "favourite_recipes" on child(AppUser)
+    recipe = db.relationship("Recipe")  # Beziehung zwischen favourite_recipe und Recipe tabelle
+
+    def __init__(self, user_id, recipe_id):
+        self.user_id = user_id
+        self.recipe_id = recipe_id
+# ermöglicht initialisierung der fk
+
+
+
