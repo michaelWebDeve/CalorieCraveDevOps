@@ -60,7 +60,7 @@ class RecipeIngredient(db.Model, SerializerMixin):
 
 
 class FavouriteRecipe(db.Model, SerializerMixin):
-    __tablename__ = "favourite_recipes"
+    __table_name__ = "favourite_recipes"
     # fk zusammensetzen zu einer pk
     user_id = db.Column(db.Integer, db.ForeignKey("app_user.id"), primary_key=True)
     recipe_id = db.Column(db.Integer, db.ForeignKey("recipe.id"), primary_key=True)

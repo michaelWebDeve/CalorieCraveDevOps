@@ -141,7 +141,13 @@
             flushContent();
             counter = 1;
             end = false;
-            downloadContent(counter, limit, query_str)
+
+              if (this.checked) {
+        query_str += "&favorites=true";  // Append favorites parameter
+        downloadContent(counter, limit, query_str, true);
+    } else {
+        downloadContent(counter, limit, query_str, false);
+    }
         });
 
 
@@ -215,19 +221,18 @@ likeButton.addEventListener( 'click', () => {
 $("#favorites").on("change", function() {
     if (this.checked) {
         query_str = "&favorites=true";
+        flushContent();
+        counter = 1;
+        end = false;
+        downloadContent(counter, limit, query_str, true);
     } else {
-        query_str = "";
+        // Seite neuladen
+        this.checked = false;
+        location.reload();
     }
-    flushContent();
-    counter = 1;
-    end = false;
-    downloadContent(counter, limit, query_str);
 });
 
 // ...
-
-
-
                         // Append the recipe element to the container
                         const container = document.getElementById('recipe-container');
                         container.appendChild(recipeElement);

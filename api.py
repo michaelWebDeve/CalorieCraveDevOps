@@ -37,6 +37,26 @@ def fetch_recipes():
         counter = int(request.args.get("counter"))
         recipes = recipes.paginate(page=counter, per_page=limit)
 
+    if "favorites" in request.args:
+        if "email" in session:
+            email = session["email"]
+
+            # user id aus der usertabelle
+            user = db.session.query(AppUser).filter_by(email=email).first()
+
+            if user:
+                # aus FavoriteRecipe Tabelle fav meal abfragen
+                favorite_recipes = db.session.query(FavouriteRecipe).filter_by(user_id=user.id).all()
+
+                if favorite_recipes:
+                    favorite_recipe_ids = [fav.recipe_id for fav in favorite_recipes]
+                    recipes = db.session.query(Recipe).filter(Recipe.id.in_(favorite_recipe_ids)).all()
+                    # mit den fav_recipe_ids das Rezept aud der Recipe Tabelle holen
+                else:
+                    return jsonify([])  # keine favs leere Liste
+            else:
+                return jsonify([])  # user nt gefunden leere liste
+
     res = []
     for r in recipes:
         res.append(r.to_dict(rules=("img_path", "ingredients_amount")))
