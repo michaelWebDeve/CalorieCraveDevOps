@@ -80,7 +80,9 @@
 {% endblock %}
 
 {% block scripts %}
+
     <script type="text/javascript">
+
         var counter = 1;
         var limit = 10;
         var end = false;
@@ -89,7 +91,7 @@
         downloadContent(counter, limit, "")
 
 
-        
+
         // Scroll listener
         $(window).scroll(() => {
             var current_y = Math.floor($(window).scrollTop());
@@ -199,9 +201,49 @@
                         // Set the HTML content of the recipe element
                         recipeElement.innerHTML = recipeContent;
 
+                        const likeButton = recipeElement.querySelector('.like-button');
+
+likeButton.addEventListener( 'click', () => {
+    // Call the function to add recipe to favourites
+       console.log("Recipe added to favourites!");
+    addToFavourites(recipe.id);
+});
+
+// ...
+
+// Show favourites checkbox listener
+$("#favorites").on("change", function() {
+    if (this.checked) {
+        query_str = "&favorites=true";
+    } else {
+        query_str = "";
+    }
+    flushContent();
+    counter = 1;
+    end = false;
+    downloadContent(counter, limit, query_str);
+});
+
+// ...
+
+
+
                         // Append the recipe element to the container
                         const container = document.getElementById('recipe-container');
                         container.appendChild(recipeElement);
+
+                        function addToFavourites(recipeId) {
+    $.post("/api/add_to_favourites", { recipe_id: recipeId }, function (data) {
+        if (data.success) {
+            // Handle success, such as updating UI to show that the recipe is liked
+            console.log("Recipe added to favourites!");
+        } else {
+            console.error("Failed to add recipe to favourites.");
+        }
+    });
+}
+
+
                     });
                 }).fail(function () {
                     const container = document.getElementById('recipe-container');
@@ -216,6 +258,9 @@
                 });
             }
         }
+
+
+
     </script>
 
 {% endblock %}
