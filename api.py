@@ -45,7 +45,7 @@ def fetch_recipes():
             user = db.session.query(AppUser).filter_by(email=email).first()
 
             if user:
-                # aus FavoriteRecipe Tabelle fav meal abfragen
+                # aus FavoriteRecipe Tabelle fav meal abfragen können
                 favorite_recipes = db.session.query(FavouriteRecipe).filter_by(user_id=user.id).all()
 
                 if favorite_recipes:
