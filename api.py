@@ -1,5 +1,5 @@
-from flask import Blueprint, request
-from db import Recipe
+from flask import Blueprint, request, jsonify, session
+from db import Recipe, AppUser, db, FavouriteRecipe
 
 api = Blueprint("api", __name__)
 
@@ -41,3 +41,25 @@ def fetch_recipes():
     for r in recipes:
         res.append(r.to_dict(rules=("img_path", "ingredients_amount")))
     return res
+
+
+@api.route("/add_to_favourites", methods=["POST"])
+def add_to_favourites():
+    if "email" in session:
+        email = session["email"]
+        user = db.session.query(AppUser).filter_by(email=email).first()
+
+        if user:
+            recipe_id = request.form.get("recipe_id")
+            existing_favourite = FavouriteRecipe.query.filter_by(user_id=user.id, recipe_id=recipe_id).first()
+
+            if not existing_favourite:
+                new_favourite = FavouriteRecipe(user_id=user.id, recipe_id=recipe_id)
+                db.session.add(new_favourite)
+                db.session.commit()
+                return jsonify(success=True)
+
+    return jsonify(success=False)
+
+
+
