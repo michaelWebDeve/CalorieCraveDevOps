@@ -46,6 +46,12 @@ class Recipe(db.Model, SerializerMixin):
     def instruction_list(self):
         return self.instruction.split("\n")
 
+    def is_favorite(self, user_id):
+        fav = FavouriteRecipe.query.filter_by(user_id=user_id, recipe_id=self.id).all()
+        if fav:
+            return True
+        return False
+
 
 class RecipeIngredient(db.Model, SerializerMixin):
     __table_name__ = "recipe_ingredient"
