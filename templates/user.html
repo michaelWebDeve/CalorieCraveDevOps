@@ -3,7 +3,36 @@
 {% block title %}User{% endblock %}
 
 {% block content %}
-
     <h1>Logged in as: {{ email }}</h1>
+<form>
+  <div class="mb-3">
+      <div class="mb-3">
+          <label for="exampleInputEmail1" class="form-label">New Email address</label>
+          <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+      </div>
+      <div class="mb-3">
+          <button type="submit" class="btn btn-primary">Change Email</button>
+      </div>
+  </div>
+  <div class="mb-3">
+      <div class="mb-3">
+          <label for="exampleInputPassword1" class="form-label">Current Password</label>
+          <input type="password" class="form-control" id="exampleInputPassword1">
+          <label for="exampleInputPassword2" class="form-label">New Password</label>
+          <input type="password" class="form-control" id="exampleInputPassword2">
+          <label for="exampleInputPassword3" class="form-label">Confirm new Password</label>
+          <input type="password" class="form-control" id="exampleInputPassword3">
+      </div>
+      <div class="mb-3">
+          <button type="submit" class="btn btn-primary">Change Password</button>
+      </div>
+  </div>
+  <div class="mb-3">
+      <label for="showFavoriteRecipes" class="form-label">Your Favorite Recipes</label>
+      <div class="mb-3">
+          <button type="submit" class="btn btn-primary" id="showFavoriteRecipes">Show Recipes</button>
+      </div>
+  </div>
+</form>
 
 {% endblock %}
