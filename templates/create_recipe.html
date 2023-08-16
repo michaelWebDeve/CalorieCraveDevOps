@@ -3,24 +3,72 @@
 {% block title %}Create Recipe{% endblock %}
 
 {% block content %}
-    <h2>Describe Recipe</h2>
-    <div class="mb-3">
-        <label for="namInput" class="form-label">Recipe name</label>
-        <input type="text" class="form-control" id="namInput" placeholder="Recipe name">
-    </div>
-    <div class="mb-3">
-        <textarea class="form-control" aria-label="With textarea" placeholder="Recipe Description"></textarea>
-    </div>
-    <div class="mb-3">
-        <label for="formFile" class="form-label">Default file input example</label>
-        <input class="form-control" type="file" id="formFile">
+    <div class="d-flex flex-row">
+        <div class="w-50 me-2 my-2">
+            <h2 class="text-center text-secondary-custom">Describe Recipe</h2>
+            <div class="d-flex flex-row">
+                <div class="mb-3 w-50 me-1 input-group text-secondary">
+                    <div class="form-floating">
+                        <input type="text" class="form-control" id="name" placeholder="Recipe name">
+                        <label for="name">Recipe name</label>
+                    </div>
+                </div>
+                <div class="mb-3 w-50 ms-1">
+                    <label for="image" class="form-label">Recipe image</label>
+                    <input class="form-control" type="file" id="image">
+                </div>
+            </div>
+            <div class="mb-3">
+                <textarea class="form-control" id="description" aria-label="With textarea"
+                          placeholder="Recipe Description"></textarea>
+            </div>
+            <div class="mb-3">
+                <div class="form-check form-switch">
+                    <input class="form-check-input" type="checkbox" id="vegetarian">
+                    <label class="form-check-label" for="vegetarian">Vegetarian</label>
+                </div>
+                <div class="form-check form-switch">
+                    <input class="form-check-input" type="checkbox" id="vegan">
+                    <label class="form-check-label" for="vegan">Vegan</label>
+                </div>
+                <div class="form-check form-switch">
+                    <input class="form-check-input" type="checkbox" id="gluten_free">
+                    <label class="form-check-label" for="gluten_free">Gluten free</label>
+                </div>
+            </div>
+            <div class="mb-3">
+                <textarea class="form-control" id="instruction" aria-label="With textarea"
+                          placeholder="Recipe Instructions"
+                          style="min-height: 100px;"></textarea>
+            </div>
+            <div class="mb-3 w-25 me-1">
+                <label for="prep_time" class="form-label">Prep time</label>
+                <input type="number" class="form-control" id="prep_time" placeholder="Prep time">
+            </div>
+            <button class="btn btn-primary" id="finish_button">Create recipe</button>
+        </div>
+        <div class="w-50 ms-2 my-2">
+            <div class="d-flex justify-content-between flex-row mb-2">
+                <h2 class="text-secondary-custom">Ingredients</h2>
+                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">Add
+                    Ingredient
+                </button>
+            </div>
+            <div class="w-100 h-100 rounded-3 p-2 border border-primary overflow-scroll" id="ing_container">
+
+            </div>
+        </div>
     </div>
 
-    <div class="d-flex flex-row">
-        <div class="col w-50 pe-3">
-            <h2>Add Ingredient</h2>
-            <div class="d-flex flex-row">
-                <div class="col-6 pe-3">
+    <!-- Modal -->
+    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-scrollable">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5 text-secondary" id="exampleModalLabel">Create Ingredient</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
                     <div class="input-group mb-3 text-secondary">
                         <div class="form-floating">
                             <input type="text" class="form-control" id="ing_name" placeholder="Ingredient name">
@@ -41,8 +89,6 @@
                         </div>
                         <span class="input-group-text w-25 justify-content-center">g</span>
                     </div>
-                </div>
-                <div class="col-6 ps-3">
                     <div class="input-group mb-3 text-secondary">
                         <div class="form-floating">
                             <input type="number" class="form-control ing-input" id="ing_carbs" placeholder="Carbs">
@@ -64,47 +110,19 @@
                         </div>
                         <span class="input-group-text w-25 justify-content-center">per 100g</span>
                     </div>
-                </div>
-            </div>
-
-            <div class="d-flex flex-row">
-                <div class="w-50">
                     <h2 class="text-primary-custom" id="kcal-output-total">0 kcal total</h2>
                     <h4 class="text-secondary-custom" id="kcal-output-100g">0 kcal on 100g</h4>
                 </div>
-                <div class="w-50 ps-3">
-                    <div class="d-flex justify-content-between">
-                        <div>
-                            <div class="form-check form-switch">
-                                <input class="form-check-input" type="checkbox" id="vegetarian">
-                                <label class="form-check-label" for="vegetarian">Vegetarian</label>
-                            </div>
-                            <div class="form-check form-switch">
-                                <input class="form-check-input" type="checkbox" id="vegan">
-                                <label class="form-check-label" for="vegan">Vegan</label>
-                            </div>
-                            <div class="form-check form-switch">
-                                <input class="form-check-input" type="checkbox" id="gluten_free">
-                                <label class="form-check-label" for="gluten_free">Gluten free</label>
-                            </div>
-                        </div>
-
-                        <div class="d-flex align-items-center">
-                            <button class="btn btn-primary" id="add_ing_button">Add Ingredient</button>
-                        </div>
-                    </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary" id="save-ingredient">Add ingredient</button>
                 </div>
             </div>
         </div>
-        <div class="col w-50 ps-3">
-            <h2>Ingredients</h2>
-            <div class="w-100 h-100 rounded-3 p-2 border border-primary overflow-scroll" id="ing_container">
-
-            </div>
-        </div>
     </div>
-    <button class="btn btn-primary" id="finish_button">FINISH</button>
 {% endblock %}
+
+
 
 {% block scripts %}
     <script type="text/javascript">
@@ -115,7 +133,23 @@
 
     <!--Listener-->
     <script type="text/javascript">
-        // Ingredient input change listener
+        // Modal save change button listener
+        $("#save-ingredient").on("click", function () {
+            var ing_name = $("#ing_name").val();
+            var ing_brand = $("#ing_brand").val();
+            var ing_carbs = $("#ing_carbs").val();
+            var ing_fat = $("#ing_fat").val();
+            var ing_protein = $("#ing_protein").val();
+            var ing_amount_used = $("#ing_amount_used").val();
+            const ing = new Ingredient(ing_name, ing_brand, ing_carbs, ing_fat, ing_protein, ing_amount_used);
+            ings.push(ing);
+            console.log(ing.calcKcal());
+            console.log(ings);
+            addIngredient(ing)
+            $('#exampleModal').modal('hide');
+        });
+
+        // Ingredient add button listener
         $("#add_ing_button").on("click", function () {
             var ing_name = $("#ing_name").val();
             var ing_brand = $("#ing_brand").val();
@@ -137,16 +171,16 @@
             var ing_fat = $("#ing_fat").val();
             var ing_protein = $("#ing_protein").val();
             var ing_amount_used = $("#ing_amount_used").val();
-            try{
+            try {
                 var kcal = Math.round(calcKcal(ing_carbs, ing_protein, ing_fat));
-                var kcal_total = Math.round(kcal*(ing_amount_used/100));
-                if(!(isNaN(kcal))){
-                    $("#kcal-output-100g").html(kcal+" kcal on 100g");
-                    if(ing_amount_used!==""){
-                        $("#kcal-output-total").html(kcal_total+" kcal total");
+                var kcal_total = Math.round(kcal * (ing_amount_used / 100));
+                if (!(isNaN(kcal))) {
+                    $("#kcal-output-100g").html(kcal + " kcal on 100g");
+                    if (ing_amount_used !== "") {
+                        $("#kcal-output-total").html(kcal_total + " kcal total");
                     }
                 }
-            }catch (e){
+            } catch (e) {
                 console.log("ERROR");
             }
         });
@@ -162,16 +196,28 @@
             console.log(ings)
         });
 
-        // Finish button listener
+        // Create recipe button listener
         $("#finish_button").on("click", function () {
-            const jsonings = JSON.stringify(ings)
-            console.log(jsonings);
+            const name = $("#name").val();
+            const description = $("#description").val();
+            const prep_time = $("#prep_time").val();
+            const instruction = $("#instruction").val();
+            const vegan = $("#vegan").is(":checked");
+            const vegetarian = $("#vegetarian").is(":checked");
+            const gluten_free = $("#gluten_free").is(":checked");
+            const recipeImage = $("#image")[0].files[0];
+
+            const recipe = new Recipe(name, description, prep_time, instruction, vegetarian, vegan, gluten_free, ings);
+            const formData = new FormData();
+            formData.append("recipe", JSON.stringify(recipe)); // Serialize recipe object
+            formData.append("recipeImage", recipeImage); // Append image file
 
             $.ajax({
                 type: "POST", // Use the appropriate HTTP method
                 url: "/api/recipes", // Replace with your actual endpoint URL
-                data: jsonings,
-                contentType: "application/json", // Set the content type to JSON
+                data: formData,
+                processData: false, // Prevent jQuery from processing the data
+                contentType: false, // Let the browser set the content type
                 success: function (response) {
                     // Handle success response from the server
                     console.log("Data sent successfully", response);
@@ -221,6 +267,30 @@
                 return Math.round(this.ing_protein * (this.ing_amount_used / 100));
             }
 
+        }
+
+        class Recipe {
+            name;
+            description;
+            prep_time;
+            instruction;
+            vegetarian;
+            vegan;
+            gluten_free;
+
+            ings;
+
+
+            constructor(name, description, prep_time, instruction, vegetarian, vegan, gluten_free, ings) {
+                this.name = name;
+                this.description = description;
+                this.prep_time = prep_time;
+                this.instruction = instruction;
+                this.vegetarian = vegetarian;
+                this.vegan = vegan;
+                this.gluten_free = gluten_free;
+                this.ings = ings;
+            }
         }
     </script>
 
