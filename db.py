@@ -58,6 +58,7 @@ class RecipeIngredient(db.Model, SerializerMixin):
 
     id = db.Column("id", db.Integer, primary_key=True)
     name = db.Column("name", db.String(100))
+    brand = db.Column("brand", db.String(100))
     fat = db.Column("fat", db.Integer)
     carbs = db.Column("carbs", db.Integer)
     protein = db.Column("protein", db.Integer)
