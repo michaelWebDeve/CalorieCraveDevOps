@@ -86,6 +86,7 @@
 
     <!--Listeners-->
     <script type="text/javascript">
+        query_str = "";
         // Scroll listener
         $(window).scroll(() => {
             var current_y = Math.floor($(window).scrollTop());
@@ -99,7 +100,7 @@
 
         // Filter button listener
         $("#filter_btn").on("click", function () {
-            let query_str = "";
+            query_str = "";
 
             var min_kcal = $("#min_kcal").val();
             var max_kcal = $("#max_kcal").val();

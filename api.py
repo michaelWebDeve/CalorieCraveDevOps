@@ -71,7 +71,6 @@ def fetch_recipes():
         if "user_id" in request.args:
             res_dict["favorite"] = r.is_favorite(request.args["user_id"])
         res.append(res_dict)
-    print(res)
     return res
 
 
