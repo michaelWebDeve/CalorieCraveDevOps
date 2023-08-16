@@ -25,14 +25,13 @@ Linus Widing
 <img src="./assets/images/CC_dark.png" alt="logo" style="width: 200px;">
 
 ## Description
-- Die App "CalorieCrave" ist eine **Rezept-App** im Social-Media-Stil für **Fitnessbegeisterte**.
-- Zu den Kernfunktionen gehören eine **scrollbare "For-You-Page "** mit Rezepten und Nährwertangaben (kcal, Makros, etc.)
-- Einfache und direkte Anzeige der Gerichte mit wichtigen Informationen
-- **Filterfunktion** ermöglicht die Filterung nach kcal und Makros
-- **Beiträge** kommen von verschiedenen **Nutzern** mit Gourmet- und einfachen Gerichten mit korrekten Nährwertangaben
-- Nutzer können ein Profil anlegen, **Favoriten speichern** und Mengen- oder Diätlisten erstellen
-- App ist **attraktiv gestaltet** für 20- bis 30-Jährige und intuitiv zu bedienen
-
+- The app "CalorieCrave" is a social media style recipe app for fitness enthusiasts.
+- Core features include a scrollable "For-You-Page " with recipes and nutritional information (kcal, macros, etc.)
+- Simple and direct display of dishes with important information
+- Filter function allows filtering by kcal and macros
+- Contributions come from different users with gourmet and simple dishes with correct nutritional information
+- Users can create a profile, save favorites and create quantity or diet lists
+- The app is attractively designed for 20- to 30-year-olds and intuitive to use
 
 
 ## Persona
@@ -40,18 +39,20 @@ Linus Widing
 ![persona_steffen](./assets/images/persona_steffen.png)
 
 ## Value Proposition 
-Unsere App bietet Fitness-Enthusiasten und gesundheitsbewussten Essern Zugang zu einer social-Media-ähnlichen Rezept-Plattform mit Filterfunktionen für Kcal und Macros sowie einem optionalen Tracking-Feature, um Fortschritte zu verfolgen. 
-Somit ist "Calorie Crave" auch die ideale App für Steffen, der sich neben seinem Studium und Job als Kellner gesund ernähren und Muskeln aufbauen möchte, ohne viel Zeit und Aufwand zu investieren. 
-Mit der "For You"-Page und der Filterfunktion kann er schnell und einfach nach Gerichten suchen, die seinen Kalorien- und Makronährstoffbedarf decken und ihm helfen, seine Ziele zu erreichen. 
-Steffen kann zwischen einer Vielzahl von Gerichten auswählen, die von verschiedenen Usern mit unterschiedlichem Erfahrungsgrad gepostet werden. 
-Die einfache und übersichtliche Darstellung der Nährwertangaben in Kombination mit den Rezepten erleichtert ihm die Umsetzung einer gesunden Ernährung und unterstützt ihn dabei, seine Ziele zu erreichen.
-Darüber hinaus kann Steffen seine Favoriten speichern und Listen für Bulk- oder Diät-Phasen erstellen, um seine Ernährung zu optimieren. 
-Die Tracking-Funktion ermöglicht es ihm, seinen Fortschritt zu verfolgen und seine Ernährung gezielt anzupassen.
-Durch die Anwendung der App "CalorieCrave" kann Steffen Zeit sparen und ohne großen kreativen Aufwand gesunde Gerichte für seinen Alltag finden, um seine Ziele effektiv zu erreichen.
+Our app offers fitness enthusiasts and health-conscious eaters access to a social media-like recipe platform with filter functions for Kcal and Macros, 
+as well as an optional tracking feature to track progress. As a result, "Calorie Crave" is also the ideal app for Steffen, 
+who wants to eat healthy and build muscle without investing a lot of time and effort alongside his studies and job as a waiter. 
+With the "For You" page and the filter function, he can quickly and easily search for dishes that meet his calorie and macronutrient 
+needs and help him reach his goals. Steffen can choose from a variety of dishes posted by different users with varying levels of experience. 
+The simple and clear presentation of the nutritional information in combination with the recipes makes it easier for him to implement a healthy diet 
+and helps him achieve his goals. In addition, Steffen can save his favorites and create lists for bulk or diet phases to optimize his diet. 
+The tracking function allows him to track his progress and make targeted adjustments to his diet. By using the "CalorieCrave" app, 
+ teffen can save time and find healthy dishes for his everyday life without much creative effort to effectively reach his goals.
+
 
 ## Goals And Ambitions
-Zusammen als Gruppe ist es unser Ziel alle Kernfunktionen der App zu implementieren und dabei auch das UI unseren Anforderungen entsprechend zu gestalten.
-Außerdem möchten wir natürlich den Anforderungen des Kurses gerecht werden.
-Es ist uns auch wichtig außerhalb der Note des Kurses etwas aus diesem Projekt mitzunehmen. 
-Wir wollen den Workflow mit Git und andere wichtige Elemente in der Entwicklung festigen, um somit auch besser auf die Praxis vorbereitet zu sein.
-Wir versuchen also die App so weit umzusetzen, dass wir sie auch selber im Alltag nutzen könnten.
+Together as a group, our goal is to implement all the core features of the app while also designing the UI to meet our requirements.
+We also want to meet the requirements of the course and learn as much as possible.
+We want to consolidate the workflow with Git and other important elements in development, so that we are also better prepared for practice.
+So we try to implement the app so far that we could also use it ourselves in everyday life.
+
