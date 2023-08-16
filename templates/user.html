@@ -3,36 +3,52 @@
 {% block title %}User{% endblock %}
 
 {% block content %}
+    <div class="container">
     <h1>Logged in as: {{ email }}</h1>
-<form>
-  <div class="mb-3">
-      <div class="mb-3">
-          <label for="exampleInputEmail1" class="form-label">New Email address</label>
-          <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
-      </div>
-      <div class="mb-3">
-          <button type="submit" class="btn btn-primary">Change Email</button>
-      </div>
-  </div>
-  <div class="mb-3">
-      <div class="mb-3">
-          <label for="exampleInputPassword1" class="form-label">Current Password</label>
-          <input type="password" class="form-control" id="exampleInputPassword1">
-          <label for="exampleInputPassword2" class="form-label">New Password</label>
-          <input type="password" class="form-control" id="exampleInputPassword2">
-          <label for="exampleInputPassword3" class="form-label">Confirm new Password</label>
-          <input type="password" class="form-control" id="exampleInputPassword3">
-      </div>
-      <div class="mb-3">
-          <button type="submit" class="btn btn-primary">Change Password</button>
-      </div>
-  </div>
-  <div class="mb-3">
-      <label for="showFavoriteRecipes" class="form-label">Your Favorite Recipes</label>
-      <div class="mb-3">
-          <button type="submit" class="btn btn-primary" id="showFavoriteRecipes">Show Recipes</button>
-      </div>
-  </div>
-</form>
+    <form method="POST" id="changeEmailForm">
+        <fieldset>
+            <legend>Change your Email</legend>
+            <div class="mb-3">
+                <label for="newEmail" class="form-label">New Email:</label>
+                <input type="email" class="form-control" id="newEmail" name="newEmail" placeholder="Enter new Email" required>
+            </div>
+            <div class="mb-3">
+                <label for="currentPasswordChangeEmail" class="form-label">Current Password:</label>
+                <input type="password" class="form-control" id="currentPasswordChangeEmail" name="currentPasswordChangeEmail" placeholder="Enter Password" required>
+            </div>
+            <div class="mb-3">
+                <button type="submit" class="btn btn-primary">Change Email</button>
+            </div>
+        </fieldset>
+    </form>
+    <form method="POST" id="changePasswordForm">
+        <fieldset>
+            <legend>Change your Password</legend>
+            <div class="mb-3">
+                <label for="currentPassword" class="form-label">Current Password:</label>
+                <input type="password" class="form-control" id="currentPassword" name="currentPassword" placeholder="Enter Password" required>
+            </div>
+            <div class="mb-3">
+                <label for="newPassword" class="form-label">New Password:</label>
+                <input type="password" class="form-control" id="newPassword" name="newPassword" placeholder="Enter new Password" required>
+            </div>
+            <div class="mb-3">
+                <label for="newPassword2" class="form-label">Confirm New Password:</label>
+                <input type="password" class="form-control" id="newPassword2" name="newPassword2" placeholder="Confirm new Password" required>
+            </div>
+            <div class="mb-3">
+                <button type="submit" class="btn btn-primary">Change Password</button>
+            </div>
+        </fieldset>
+    </form>
+    <form method="POST" id="showFavoriteRecipesForm">
+        <fieldset>
+            <legend>Your Favorite Recipes</legend>
+            <div class="mb-3">
+                <button type="submit" class="btn btn-primary" id="showFavoriteRecipes">Show Recipes</button>
+            </div>
+        </fieldset>
+    </form>
+</div>
 
 {% endblock %}
