@@ -4,7 +4,11 @@ parent: Team Evaluation
 nav_order: 4
 ---
 
-[Jane Dane]
+Michael Otieno
+{: .label .label-red }
+Justin Grünberg
+{: .label .label-green }
+Linus Widing
 {: .label }
 
 # [Summary of individual contributions]
