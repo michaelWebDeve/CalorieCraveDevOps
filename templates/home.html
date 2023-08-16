@@ -222,10 +222,9 @@
                             <span class="visually-hidden">Button</span>
                         `;
 
-                        if(recipe.favorite){
+                        if (recipe.favorite) {
                             likeButtonElement.innerHTML = likeButtonFilled;
-                        }
-                        else{
+                        } else {
                             likeButtonElement.innerHTML = likeButtonNotFilled;
                         }
                         buttonContainer.appendChild(likeButtonElement);
@@ -255,26 +254,25 @@
         }
 
         function toggleFavorite(recipeId, buttonContainer) {
-                            const user_id = "{{ session["user_id"] }}";
-                            $.ajax({
-                                type: "POST", // Use the appropriate HTTP method
-                                url: "/api/toggle_favorite?user_id=" + user_id + "&" + "recipe_id=" + recipeId, // Replace with your actual endpoint URL
-                                success: function (response) {
-                                    // Handle success response from the server
-                                    console.log("Data sent successfully", response);
-                                    if(response==="on"){
-                                        buttonContainer.innerHTML = likeButtonFilled;
-                                    }
-                                    else if(response==="off"){
-                                        buttonContainer.innerHTML = likeButtonNotFilled;
-                                    }
-                                },
-                                error: function (error) {
-                                    // Handle error response from the server
-                                    console.error("Error sending data", error);
-                                }
-                            });
-                        }
+            const user_id = "{{ session["user_id"] }}";
+            $.ajax({
+                type: "POST", // Use the appropriate HTTP method
+                url: "/api/toggle_favorite?user_id=" + user_id + "&" + "recipe_id=" + recipeId, // Replace with your actual endpoint URL
+                success: function (response) {
+                    // Handle success response from the server
+                    console.log("Data sent successfully", response);
+                    if (response === "on") {
+                        buttonContainer.innerHTML = likeButtonFilled;
+                    } else if (response === "off") {
+                        buttonContainer.innerHTML = likeButtonNotFilled;
+                    }
+                },
+                error: function (error) {
+                    // Handle error response from the server
+                    console.error("Error sending data", error);
+                }
+            });
+        }
     </script>
 
 {% endblock %}
