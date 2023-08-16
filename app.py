@@ -32,6 +32,7 @@ def login():
         if app_user is not None:
             if app_user.pwd == pw:
                 session["email"] = email
+                session["user_id"] = app_user.id
                 return redirect(url_for("index"))
             else:
                 flash("Password incorrect!", "error")
@@ -63,6 +64,7 @@ def register():
                 app_user = AppUser(email, pwd)
                 db.session.add(app_user)
                 db.session.commit()
+                session["user_id"] = app_user.id
                 return redirect(url_for("index"))
 
     return render_template("register.html")
