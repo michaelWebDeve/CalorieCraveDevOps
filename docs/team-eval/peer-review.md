@@ -4,7 +4,11 @@ parent: Team Evaluation
 nav_order: 3
 ---
 
-[Jane Dane]
+Michael Otieno
+{: .label .label-red }
+Justin Grünberg
+{: .label .label-green }
+Linus Widing
 {: .label }
 
 # [Peer review]
@@ -19,7 +23,7 @@ nav_order: 3
 {:toc}
 </details>
 
-## [team member] - review 1
+## [Linus Widing] - review 1
 
 ### My observation (Wahrnehmung)
 
@@ -32,6 +36,29 @@ nav_order: 3
 ### Tip for the future (Wunsch)
 
 [What should be changed or strengthened for the point of view of the reviewer? ]
+
+## [Michael Otieno] - review 3
+
+### My observation (Wahrnehmung)
+
+I found the communication within the team to be a highlight, as it flowed seamlessly. Additionally, our use of GitHub 
+for collaborative work was a standout aspect; it provided a great learning opportunity and valuable takeaways. However, 
+I did experience some reservations regarding the complexity of our project, particularly due to the scrollable homepage. 
+This complexity was intensified by the need to delve into both JavaScript and SQLAlchemy simultaneously, which at times 
+felt overwhelming.
+
+### Effect on me (Wirkung)
+
+This observation had a positive impact on me in terms of honing my collaboration and version control skills through GitHub. 
+However, the project's heightened complexity had both positive and negative effects. While it challenged me to expand my 
+skill set, it also occasionally led to feelings of being overwhelmed due to the combination of new technologies.
+
+### Tip for the future (Wunsch)
+
+For future projects, I would suggest considering the balance between innovation and complexity. While pushing the 
+boundaries of our know-how can be beneficial, we should also ensure that the learning curve remains manageable. 
+This might involve breaking down the introduction of new technologies into smaller steps or allocating more time for 
+skill acquisition. 
 
 ## [Justin Grünberg] - review 2
 

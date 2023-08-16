@@ -27,7 +27,7 @@ Linus Widing
 </details>
 
 Throughout the development process, our collaborative efforts have resulted in the creation of a functional and 
-user-friendly recipe-sharing application. As a team, we have made major design decisions both on the frontend and backend, 
+user-friendly recipe-sharing app. As a team, we have made major design decisions both on the frontend and backend, 
 which have greatly contributed to the app's overall look and functionality. The decision to implement a scrollable homepage 
 with filter and reset buttons has enhanced the user experience, allowing for efficient navigation and recipe discovery.
 Collectively, we have aimed to integrate these features, ensuring that users can easily engage with the app's 
