@@ -1,10 +1,10 @@
+from flask import Blueprint, request, jsonify, session
+from db import Recipe, AppUser, db, FavouriteRecipe
 import json
 import os.path
 
 from flask import Blueprint, request
-from db import Recipe
-from flask import Blueprint, request, jsonify, session
-from db import Recipe, AppUser, db, FavouriteRecipe
+from db import Recipe, db, FavouriteRecipe
 
 api = Blueprint("api", __name__)
 from app import app
