@@ -3,9 +3,27 @@
 {% block title %}User{% endblock %}
 
 {% block content %}
+    {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+            {% for category, message in messages %}
+                {% if category == "success" %}
+                    <div class="alert alert-success alert-dismissible fade show" role="alert">
+                        {{ message }}
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                    </div>
+                {% elif category == "error" %}
+                    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                        {{ message }}
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                    </div>
+                {% endif %}
+            {% endfor %}
+        {% endif %}
+    {% endwith %}
+
     <div class="container">
     <h1>Logged in as: {{ email }}</h1>
-    <form method="POST" id="changeEmailForm">
+    <form method="POST" id="changeEmailForm" action="{{ url_for('change_email') }}">
         <fieldset>
             <legend>Change your Email</legend>
             <div class="mb-3">
@@ -21,7 +39,7 @@
             </div>
         </fieldset>
     </form>
-    <form method="POST" id="changePasswordForm">
+    <form method="POST" id="changePasswordForm" action="{{ url_for('change_password') }}">
         <fieldset>
             <legend>Change your Password</legend>
             <div class="mb-3">
