@@ -77,6 +77,53 @@ def user():
         return redirect(url_for("login"))
 
 
+@app.route('/change_email', methods=["POST"])
+def change_email():
+    if "email" not in session:
+        flash("You are not logged in!", "error")
+        return redirect(url_for("login"))
+
+    new_email = request.form["newEmail"]
+    current_password = request.form["currentPasswordChangeEmail"]
+
+    app_user = db.session.query(AppUser).filter_by(email=session["email"]).first()
+    if app_user is None or app_user.pwd != current_password:
+        flash("Current password incorrect!", "error")
+        return redirect(url_for("user"))
+
+    app_user.email = new_email
+    db.session.commit()
+
+    flash("Email changed successfully!", "success")
+    return redirect(url_for("user"))
+
+
+@app.route('/change_password', methods=["POST"])
+def change_password():
+    if "email" not in session:
+        flash("You are not logged in!", "error")
+        return redirect(url_for("login"))
+
+    current_password = request.form["currentPassword"]
+    new_password = request.form["newPassword"]
+    confirm_password = request.form["newPassword2"]
+
+    if new_password != confirm_password:
+        flash("Passwords do not match!", "error")
+        return redirect(url_for("user"))
+
+    app_user = db.session.query(AppUser).filter_by(email=session["email"]).first()
+    if app_user is None or app_user.pwd != current_password:
+        flash("Current password incorrect!", "error")
+        return redirect(url_for("user"))
+
+    app_user.pwd = new_password
+    db.session.commit()
+
+    flash("Password changed successfully!", "success")
+    return redirect(url_for("user"))
+
+
 @app.route('/logout')
 def logout():
     if "email" in session:
