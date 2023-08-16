@@ -205,9 +205,10 @@
             const vegan = $("#vegan").is(":checked");
             const vegetarian = $("#vegetarian").is(":checked");
             const gluten_free = $("#gluten_free").is(":checked");
+            const created_by = "{{ session["user_id"] }}"
             const recipeImage = $("#image")[0].files[0];
 
-            const recipe = new Recipe(name, description, prep_time, instruction, vegetarian, vegan, gluten_free, ings);
+            const recipe = new Recipe(name, description, prep_time, instruction, vegetarian, vegan, gluten_free, created_by, ings);
             const formData = new FormData();
             formData.append("recipe", JSON.stringify(recipe)); // Serialize recipe object
             formData.append("recipeImage", recipeImage); // Append image file
@@ -277,11 +278,12 @@
             vegetarian;
             vegan;
             gluten_free;
+            created_by;
 
             ings;
 
 
-            constructor(name, description, prep_time, instruction, vegetarian, vegan, gluten_free, ings) {
+            constructor(name, description, prep_time, instruction, vegetarian, vegan, gluten_free, created_by, ings) {
                 this.name = name;
                 this.description = description;
                 this.prep_time = prep_time;
@@ -289,6 +291,7 @@
                 this.vegetarian = vegetarian;
                 this.vegan = vegan;
                 this.gluten_free = gluten_free;
+                this.created_by = created_by;
                 this.ings = ings;
             }
         }

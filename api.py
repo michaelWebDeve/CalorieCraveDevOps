@@ -4,7 +4,7 @@ import json
 import os.path
 
 from flask import Blueprint, request
-from db import Recipe, db, FavouriteRecipe
+from db import Recipe, db, FavouriteRecipe, RecipeIngredient
 
 api = Blueprint("api", __name__)
 from app import app
@@ -21,10 +21,34 @@ def fetch_recipes():
             instruction=recipe_data["instruction"],
             vegetarian=recipe_data["vegetarian"],
             vegan=recipe_data["vegan"],
-            gluten_free=recipe_data["gluten_free"]
+            gluten_free=recipe_data["gluten_free"],
+            created_by=recipe_data["created_by"]
         )
+        total_kcal = 0
+        total_protein = 0
+        ingredients = []
+        for ing in recipe_data["ings"]:
+            ingredient = RecipeIngredient(
+                name = ing["ing_name"],
+                brand = ing["ing_brand"],
+                quantity = int(ing["ing_amount_used"]),
+                fat=int(ing["ing_fat"]),
+                carbs=int(ing["ing_carbs"]),
+                protein=int(ing["ing_protein"]),
+                recipe=recipe
+            )
+            total_kcal += ((ingredient.protein * 4.1) + (ingredient.carbs * 4.1) + (ingredient.fat * 9.3)) * (ingredient.quantity / 100)
+            total_protein += ingredient.protein * (ingredient.quantity / 100)
+            ingredients.append(ingredient)
+
+        recipe.total_kcal = int(total_kcal)
+        recipe.total_protein = int(total_protein)
+        db.session.add(recipe)
+        db.session.add_all(ingredients)
+        db.session.commit()
+
         recipe_image = request.files["recipeImage"]
-        recipe_image.save(os.path.join(app.config["UPLOAD_FOLDER"], "test.jpg"))
+        recipe_image.save(os.path.join(app.config["UPLOAD_FOLDER"], f"{recipe.id}.jpg"))
         return "POSTED SUCCESSFULLY"
     else:
         recipes = Recipe.query.order_by(Recipe.id)
