@@ -58,18 +58,19 @@
                             id="filter_reset_btn">Reset
                     </button>
                 </div>
-                          <div class="mb-3">
-                <div class="form-check form-switch">
-                    <input class="form-check-input" type="checkbox" id="favorites">
-                    <label class="form-check-label" for="vegetarian">Show favourites</label>
+                <div class="mb-3">
+                    <div class="form-check form-switch">
+                        <input class="form-check-input" type="checkbox" id="favorites">
+                        <label class="form-check-label" for="vegetarian">Show favourites</label>
+                    </div>
+                    <div class="form-check form-switch">
+                        <input class="form-check-input" type="checkbox" id="own_recipes">
+                        <label class="form-check-label" for="vegan">Show own recipes </label>
+                    </div>
                 </div>
-                <div class="form-check form-switch">
-                    <input class="form-check-input" type="checkbox" id="own_recipes">
-                    <label class="form-check-label" for="vegan">Show own recipes </label>
-                </div>
-            </div>
 
-        <input class="btn btn-primary w-100" onclick="window.location.href='/user';" type="button" value="Add new recipe" id="add_recipe_btn">
+                <input class="btn btn-primary w-100" onclick="window.location.href='/user';" type="button"
+                       value="Add new recipe" id="add_recipe_btn">
 
             </div>
         </div>
@@ -89,7 +90,6 @@
 
         // initialize home page
         downloadContent(counter, limit, "")
-
 
 
         // Scroll listener
@@ -129,28 +129,26 @@
             if (max_prep_time) {
                 query_str = query_str + "&max_prep_time=" + max_prep_time;
             }
-            if(vegetarian) {
+            if (vegetarian) {
                 query_str = query_str + "&vegetarian=" + vegetarian;
             }
-            if(vegan) {
+            if (vegan) {
                 query_str = query_str + "&vegan=" + vegan;
             }
-            if(gluten_free) {
+            if (gluten_free) {
                 query_str = query_str + "&gluten_free=" + gluten_free;
             }
             flushContent();
             counter = 1;
             end = false;
 
-              if (this.checked) {
-        query_str += "&favorites=true";  // Append favorites parameter
-        downloadContent(counter, limit, query_str, true);
-    } else {
-        downloadContent(counter, limit, query_str, false);
-    }
+            if (this.checked) {
+                query_str += "&favorites=true";  // Append favorites parameter
+                downloadContent(counter, limit, query_str, true);
+            } else {
+                downloadContent(counter, limit, query_str, false);
+            }
         });
-
-
 
 
         // Function to remove all recipes
@@ -165,88 +163,85 @@
                     data.forEach(recipe => {
                         // Create a new recipe element
                         const recipeElement = document.createElement('div');
-                       const recipeContent = `
-    <div class="recipe bg-secondary mb-4 row m-0 p-4 rounded-3 bg-opaque bg-secondary">
-        <div class="col-2">
-            <img src="/static/${recipe.img_path}" alt="indisch" class="rounded-3 w-100 h-100" style="object-fit: cover;">
-        </div>
-        <div class="recipe_info_container col-9">
-            <h1><a class="text-white link-light" href="/recipe/${recipe.id}" style="text-decoration: none">${recipe.name}</a></h1>
-            <table>
-                <tr class="fs-4">
-                    <td class="nutrition_label text-end pe-3 text-primary-custom">kcal</td>
-                    <td>${recipe.total_kcal}</td>
-                </tr>
-                <tr class="fs-4">
-                    <td class="nutrition_label text-end pe-3 text-primary-custom" style="color: var(--cstm_primary)">Protein</td>
-                    <td>${recipe.total_protein}g</td>
-                </tr>
-                <tr>
-                    <td class="tag_label text-end pe-3 text-secondary-custom">Ingredients</td>
-                    <td class="tag_value">${recipe.ingredients_amount}</td>
-                </tr>
-                <tr>
-                    <td class="tag_label text-end pe-3 text-secondary-custom">Prep time</td>
-                    <td class="tag_value">${recipe.prep_time} min</td>
-                </tr>
-            </table>
-        </div>
-        <div class="col-1 p-0 d-flex align-items-end">
-            <div class="btn-group">
-                <button id="like_button" type="button" class="btn btn-outline-secondary like-button">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-heart-fill" viewBox="0 0 16 16">
-                        <path fill-rule="evenodd" d="M8 1.314C12.438-3.248 23.534 4.735 8 15-7.534 4.736 3.562-3.248 8 1.314z"></path>
-                    </svg>
-                    <span class="visually-hidden">Button</span>
-                </button>
-            </div>
-        </div>
-    </div>
-`;
+                        const recipeContent = `
+                            <div class="recipe bg-secondary mb-4 row m-0 p-4 rounded-3 bg-opaque bg-secondary">
+                                <div class="col-2">
+                                    <img src="/static/${recipe.img_path}" alt="indisch" class="rounded-3 w-100 h-100" style="object-fit: cover;">
+                                </div>
+                                <div class="recipe_info_container col-9">
+                                    <h1><a class="text-white link-light" href="/recipe/${recipe.id}" style="text-decoration: none">${recipe.name}</a></h1>
+                                    <table>
+                                        <tr class="fs-4">
+                                            <td class="nutrition_label text-end pe-3 text-primary-custom">kcal</td>
+                                            <td>${recipe.total_kcal}</td>
+                                        </tr>
+                                        <tr class="fs-4">
+                                            <td class="nutrition_label text-end pe-3 text-primary-custom" style="color: var(--cstm_primary)">Protein</td>
+                                            <td>${recipe.total_protein}g</td>
+                                        </tr>
+                                        <tr>
+                                            <td class="tag_label text-end pe-3 text-secondary-custom">Ingredients</td>
+                                            <td class="tag_value">${recipe.ingredients_amount}</td>
+                                        </tr>
+                                        <tr>
+                                            <td class="tag_label text-end pe-3 text-secondary-custom">Prep time</td>
+                                            <td class="tag_value">${recipe.prep_time} min</td>
+                                        </tr>
+                                    </table>
+                                </div>
+                                <div class="col-1 p-0 d-flex align-items-end">
+                                    <div class="btn-group">
+                                        <button id="like_button" type="button" class="btn btn-outline-secondary like-button">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-heart-fill" viewBox="0 0 16 16">
+                                                <path fill-rule="evenodd" d="M8 1.314C12.438-3.248 23.534 4.735 8 15-7.534 4.736 3.562-3.248 8 1.314z"></path>
+                                            </svg>
+                                            <span class="visually-hidden">Button</span>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                            `;
 
                         // Set the HTML content of the recipe element
                         recipeElement.innerHTML = recipeContent;
 
                         const likeButton = recipeElement.querySelector('.like-button');
 
-likeButton.addEventListener( 'click', () => {
-    // Call the function to add recipe to favourites
-       console.log("Recipe added to favourites!");
-    addToFavourites(recipe.id);
-});
+                        likeButton.addEventListener('click', () => {
+                            // Call the function to add recipe to favourites
+                            console.log("Recipe added to favourites!");
+                            addToFavourites(recipe.id);
+                        });
 
-// ...
+                        $("#favorites").on("change", function () {
+                            if (this.checked) {
+                                query_str = "&favorites=true";
+                                flushContent();
+                                counter = 1;
+                                end = false;
+                                downloadContent(counter, limit, query_str, true);
+                            } else {
+                                // Seite neuladen
+                                this.checked = false;
+                                location.reload();
+                            }
+                        });
 
-// Show favourites checkbox-listener
-$("#favorites").on("change", function() {
-    if (this.checked) {
-        query_str = "&favorites=true";
-        flushContent();
-        counter = 1;
-        end = false;
-        downloadContent(counter, limit, query_str, true);
-    } else {
-        // Seite neuladen
-        this.checked = false;
-        location.reload();
-    }
-});
 
-// ...
                         // Append the recipe element to the container
                         const container = document.getElementById('recipe-container');
                         container.appendChild(recipeElement);
 
                         function addToFavourites(recipeId) {
-    $.post("/api/add_to_favourites", { recipe_id: recipeId }, function (data) {
-        if (data.success) {
-            // Handle success, such as updating UI to show that the recipe is liked
-            console.log("Recipe added to favourites!");
-        } else {
-            console.error("Failed to add recipe to favourites.");
-        }
-    });
-}
+                            $.post("/api/add_to_favourites", {recipe_id: recipeId}, function (data) {
+                                if (data.success) {
+                                    // Handle success, such as updating UI to show that the recipe is liked
+                                    console.log("Recipe added to favourites!");
+                                } else {
+                                    console.error("Failed to add recipe to favourites.");
+                                }
+                            });
+                        }
 
 
                     });
@@ -263,7 +258,6 @@ $("#favorites").on("change", function() {
                 });
             }
         }
-
 
 
     </script>
