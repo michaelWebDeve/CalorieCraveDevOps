@@ -1,48 +1,69 @@
+import json
+import os.path
+
+from flask import Blueprint, request
+from db import Recipe
 from flask import Blueprint, request, jsonify, session
 from db import Recipe, AppUser, db, FavouriteRecipe
 
 api = Blueprint("api", __name__)
+from app import app
 
 
-@api.route("/recipes/")
+@api.route("/recipes/", methods=["GET", "POST"])
 def fetch_recipes():
-    recipes = Recipe.query.order_by(Recipe.id)
-    if "min_kcal" in request.args:
-        min_kcal = int(request.args.get("min_kcal"))
-        recipes = recipes.filter(Recipe.total_kcal > min_kcal)
+    if request.method == "POST":
+        recipe_data = json.loads(request.form.get("recipe"))
+        recipe = Recipe(
+            name=recipe_data["name"],
+            description=recipe_data["description"],
+            prep_time=int(recipe_data["prep_time"]),
+            instruction=recipe_data["instruction"],
+            vegetarian=recipe_data["vegetarian"],
+            vegan=recipe_data["vegan"],
+            gluten_free=recipe_data["gluten_free"]
+        )
+        recipe_image = request.files["recipeImage"]
+        recipe_image.save(os.path.join(app.config["UPLOAD_FOLDER"], "test.jpg"))
+        return "POSTED SUCCESSFULLY"
+    else:
+        recipes = Recipe.query.order_by(Recipe.id)
+        if "min_kcal" in request.args:
+            min_kcal = int(request.args.get("min_kcal"))
+            recipes = recipes.filter(Recipe.total_kcal > min_kcal)
 
-    if "max_kcal" in request.args:
-        max_kcal = int(request.args.get("max_kcal"))
-        recipes = recipes.filter(Recipe.total_kcal < max_kcal)
+        if "max_kcal" in request.args:
+            max_kcal = int(request.args.get("max_kcal"))
+            recipes = recipes.filter(Recipe.total_kcal < max_kcal)
 
-    if "min_protein" in request.args:
-        min_protein = int(request.args.get("min_protein"))
-        recipes = recipes.filter(Recipe.total_protein > min_protein)
+        if "min_protein" in request.args:
+            min_protein = int(request.args.get("min_protein"))
+            recipes = recipes.filter(Recipe.total_protein > min_protein)
 
-    if "max_prep_time" in request.args:
-        max_prep_time = int(request.args.get("max_prep_time"))
-        recipes = recipes.filter(Recipe.prep_time < max_prep_time)
+        if "max_prep_time" in request.args:
+            max_prep_time = int(request.args.get("max_prep_time"))
+            recipes = recipes.filter(Recipe.prep_time < max_prep_time)
 
-    if "vegan" in request.args:
-        recipes = recipes.filter(Recipe.vegan)
+        if "vegan" in request.args:
+            recipes = recipes.filter(Recipe.vegan)
 
-    if "vegetarian" in request.args:
-        recipes = recipes.filter(Recipe.vegetarian)
+        if "vegetarian" in request.args:
+            recipes = recipes.filter(Recipe.vegetarian)
 
-    if "gluten_free" in request.args:
-        recipes = recipes.filter(Recipe.gluten_free)
+        if "gluten_free" in request.args:
+            recipes = recipes.filter(Recipe.gluten_free)
 
-    if "favorites_only" in request.args:
-        user_id = request.args.get("user_id")
-        favorite_recipes = FavouriteRecipe.query.filter_by(user_id=user_id).all()
-        if favorite_recipes:
-            favorite_recipe_ids = [fav.recipe_id for fav in favorite_recipes]
-            recipes = recipes.filter(Recipe.id.in_(favorite_recipe_ids))
+        if "favorites_only" in request.args:
+            user_id = request.args.get("user_id")
+            favorite_recipes = FavouriteRecipe.query.filter_by(user_id=user_id).all()
+            if favorite_recipes:
+                favorite_recipe_ids = [fav.recipe_id for fav in favorite_recipes]
+                recipes = recipes.filter(Recipe.id.in_(favorite_recipe_ids))
 
-    if ("limit" and "counter") in request.args:
-        limit = int(request.args.get("limit"))
-        counter = int(request.args.get("counter"))
-        recipes = recipes.paginate(page=counter, per_page=limit)
+        if ("limit" and "counter") in request.args:
+            limit = int(request.args.get("limit"))
+            counter = int(request.args.get("counter"))
+            recipes = recipes.paginate(page=counter, per_page=limit)
 
     res = []
     for r in recipes:
