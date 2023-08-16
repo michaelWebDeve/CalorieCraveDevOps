@@ -32,54 +32,45 @@ def fetch_recipes():
     if "gluten_free" in request.args:
         recipes = recipes.filter(Recipe.gluten_free)
 
+    if "favorites_only" in request.args:
+        user_id = request.args.get("user_id")
+        favorite_recipes = FavouriteRecipe.query.filter_by(user_id=user_id).all()
+        if favorite_recipes:
+            favorite_recipe_ids = [fav.recipe_id for fav in favorite_recipes]
+            recipes = recipes.filter(Recipe.id.in_(favorite_recipe_ids))
+
     if ("limit" and "counter") in request.args:
         limit = int(request.args.get("limit"))
         counter = int(request.args.get("counter"))
         recipes = recipes.paginate(page=counter, per_page=limit)
 
-    if "favorites" in request.args:
-        if "email" in session:
-            email = session["email"]
-
-            # user id aus der usertabelle
-            user = db.session.query(AppUser).filter_by(email=email).first()
-
-            if user:
-                # aus FavoriteRecipe Tabelle fav meal abfragen können
-                favorite_recipes = db.session.query(FavouriteRecipe).filter_by(user_id=user.id).all()
-
-                if favorite_recipes:
-                    favorite_recipe_ids = [fav.recipe_id for fav in favorite_recipes]
-                    recipes = db.session.query(Recipe).filter(Recipe.id.in_(favorite_recipe_ids)).all()
-                    # mit den fav_recipe_ids das Rezept aud der Recipe Tabelle holen
-                else:
-                    return jsonify([])  # keine favs leere Liste
-            else:
-                return jsonify([])  # user nt gefunden leere liste
-
     res = []
     for r in recipes:
-        res.append(r.to_dict(rules=("img_path", "ingredients_amount")))
+        res_dict = r.to_dict(rules=("img_path", "ingredients_amount"))
+        if "user_id" in request.args:
+            res_dict["favorite"] = r.is_favorite(request.args["user_id"])
+        res.append(res_dict)
+    print(res)
     return res
 
 
-@api.route("/add_to_favourites", methods=["POST"])
+@api.route("/toggle_favorite", methods=["POST"])
 def add_to_favourites():
-    if "email" in session:
-        email = session["email"]
-        user = db.session.query(AppUser).filter_by(email=email).first()
-
-        if user:
-            recipe_id = request.form.get("recipe_id")
-            existing_favourite = FavouriteRecipe.query.filter_by(user_id=user.id, recipe_id=recipe_id).first()
-
-            if not existing_favourite:
-                new_favourite = FavouriteRecipe(user_id=user.id, recipe_id=recipe_id)
-                db.session.add(new_favourite)
-                db.session.commit()
-                return jsonify(success=True)
-
-    return jsonify(success=False)
+    args = request.args
+    if "user_id" and "recipe_id" in args:
+        user_id = int(request.args.get("user_id"))
+        recipe_id = int(request.args.get("recipe_id"))
+        existing_favourite = FavouriteRecipe.query.filter_by(user_id=user_id, recipe_id=recipe_id).first()
+        if not existing_favourite:
+            new_favourite = FavouriteRecipe(user_id=user_id, recipe_id=recipe_id)
+            db.session.add(new_favourite)
+            db.session.commit()
+            return "on"
+        else:
+            db.session.delete(existing_favourite)
+            db.session.commit()
+            return "off"
+    return "non"
 
 
 

@@ -82,16 +82,10 @@
 
 {% block scripts %}
 
+
+
+    <!--Listeners-->
     <script type="text/javascript">
-
-        var counter = 1;
-        var limit = 10;
-        var end = false;
-
-        // initialize home page
-        downloadContent(counter, limit, "")
-
-
         // Scroll listener
         $(window).scroll(() => {
             var current_y = Math.floor($(window).scrollTop());
@@ -103,10 +97,9 @@
             }
         });
 
-        // Filter Button listener
-        var query_str = "";
+        // Filter button listener
         $("#filter_btn").on("click", function () {
-            query_str = "";
+            let query_str = "";
 
             var min_kcal = $("#min_kcal").val();
             var max_kcal = $("#max_kcal").val();
@@ -115,6 +108,7 @@
             var vegetarian = $("#vegetarian").is(":checked");
             var vegan = $("#vegan").is(":checked");
             var gluten_free = $("#gluten_free").is(":checked");
+            var favorites_only = $("#favorites").is(":checked");
 
 
             if (min_kcal) {
@@ -138,6 +132,9 @@
             if (gluten_free) {
                 query_str = query_str + "&gluten_free=" + gluten_free;
             }
+            if (favorites_only) {
+                query_str = query_str + "&favorites_only=" + favorites_only;
+            }
             flushContent();
             counter = 1;
             end = false;
@@ -150,6 +147,17 @@
             }
         });
 
+    </script>
+
+    <!--Functions-->
+    <script type="text/javascript">
+
+        var counter = 1;
+        var limit = 10;
+        var end = false;
+
+        // initialize home page
+        downloadContent(counter, limit, "")
 
         // Function to remove all recipes
         function flushContent() {
@@ -159,11 +167,11 @@
         // Function to query recipes from API and append them to the page
         function downloadContent(counter, limit, query_str) {
             if (!end) {
-                $.get("/api/recipes/?counter=" + counter + "&limit=" + limit + query_str, function (data) {
+                $.get("/api/recipes/?counter=" + counter + "&limit=" + limit + "&user_id=" + "{{ session["user_id"] }}" + query_str, function (data) {
                     data.forEach(recipe => {
                         // Create a new recipe element
                         const recipeElement = document.createElement('div');
-                        const recipeContent = `
+                        let recipeContent = `
                             <div class="recipe bg-secondary mb-4 row m-0 p-4 rounded-3 bg-opaque bg-secondary">
                                 <div class="col-2">
                                     <img src="/static/${recipe.img_path}" alt="indisch" class="rounded-3 w-100 h-100" style="object-fit: cover;">
@@ -189,61 +197,48 @@
                                         </tr>
                                     </table>
                                 </div>
-                                <div class="col-1 p-0 d-flex align-items-end">
-                                    <div class="btn-group">
-                                        <button id="like_button" type="button" class="btn btn-outline-secondary like-button">
-                                            <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-heart-fill" viewBox="0 0 16 16">
-                                                <path fill-rule="evenodd" d="M8 1.314C12.438-3.248 23.534 4.735 8 15-7.534 4.736 3.562-3.248 8 1.314z"></path>
-                                            </svg>
-                                            <span class="visually-hidden">Button</span>
-                                        </button>
-                                    </div>
+                                <div class="col-1 p-0 d-flex align-items-end button-container">
+                                    <button id="like_button" type="button" class="btn btn-outline-secondary like-button">
+
+                            </button>
                                 </div>
                             </div>
                             `;
-
                         // Set the HTML content of the recipe element
                         recipeElement.innerHTML = recipeContent;
 
+                        const buttonContainer = recipeElement.querySelector('.like-button');
+                        const likeButtonElement = document.createElement('div');
+                        likeButtonFilled = `
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-heart-fill" viewBox="0 0 16 16">
+                                <path fill-rule="evenodd" d="M8 1.314C12.438-3.248 23.534 4.735 8 15-7.534 4.736 3.562-3.248 8 1.314z"/>
+                            </svg>
+                            <span class="visually-hidden">Button</span>
+                        `;
+                        likeButtonNotFilled = `
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-heart" viewBox="0 0 16 16">
+                                <path d="m8 2.748-.717-.737C5.6.281 2.514.878 1.4 3.053c-.523 1.023-.641 2.5.314 4.385.92 1.815 2.834 3.989 6.286 6.357 3.452-2.368 5.365-4.542 6.286-6.357.955-1.886.838-3.362.314-4.385C13.486.878 10.4.28 8.717 2.01L8 2.748zM8 15C-7.333 4.868 3.279-3.04 7.824 1.143c.06.055.119.112.176.171a3.12 3.12 0 0 1 .176-.17C12.72-3.042 23.333 4.867 8 15z"/>
+                            </svg>
+                            <span class="visually-hidden">Button</span>
+                        `;
+
+                        if(recipe.favorite){
+                            likeButtonElement.innerHTML = likeButtonFilled;
+                        }
+                        else{
+                            likeButtonElement.innerHTML = likeButtonNotFilled;
+                        }
+                        buttonContainer.appendChild(likeButtonElement);
+
                         const likeButton = recipeElement.querySelector('.like-button');
-
                         likeButton.addEventListener('click', () => {
-                            // Call the function to add recipe to favourites
-                            console.log("Recipe added to favourites!");
-                            addToFavourites(recipe.id);
-                        });
-
-                        $("#favorites").on("change", function () {
-                            if (this.checked) {
-                                query_str = "&favorites=true";
-                                flushContent();
-                                counter = 1;
-                                end = false;
-                                downloadContent(counter, limit, query_str, true);
-                            } else {
-                                // Seite neuladen
-                                this.checked = false;
-                                location.reload();
-                            }
+                            toggleFavorite(recipe.id, buttonContainer);
                         });
 
 
                         // Append the recipe element to the container
                         const container = document.getElementById('recipe-container');
                         container.appendChild(recipeElement);
-
-                        function addToFavourites(recipeId) {
-                            $.post("/api/add_to_favourites", {recipe_id: recipeId}, function (data) {
-                                if (data.success) {
-                                    // Handle success, such as updating UI to show that the recipe is liked
-                                    console.log("Recipe added to favourites!");
-                                } else {
-                                    console.error("Failed to add recipe to favourites.");
-                                }
-                            });
-                        }
-
-
                     });
                 }).fail(function () {
                     const container = document.getElementById('recipe-container');
@@ -259,7 +254,27 @@
             }
         }
 
-
+        function toggleFavorite(recipeId, buttonContainer) {
+                            const user_id = "{{ session["user_id"] }}";
+                            $.ajax({
+                                type: "POST", // Use the appropriate HTTP method
+                                url: "/api/toggle_favorite?user_id=" + user_id + "&" + "recipe_id=" + recipeId, // Replace with your actual endpoint URL
+                                success: function (response) {
+                                    // Handle success response from the server
+                                    console.log("Data sent successfully", response);
+                                    if(response==="on"){
+                                        buttonContainer.innerHTML = likeButtonFilled;
+                                    }
+                                    else if(response==="off"){
+                                        buttonContainer.innerHTML = likeButtonNotFilled;
+                                    }
+                                },
+                                error: function (error) {
+                                    // Handle error response from the server
+                                    console.error("Error sending data", error);
+                                }
+                            });
+                        }
     </script>
 
 {% endblock %}
