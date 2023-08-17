@@ -93,6 +93,7 @@ def change_email():
 
     app_user.email = new_email
     db.session.commit()
+    session["email"] = new_email
 
     flash("Email changed successfully!", "success")
     return redirect(url_for("user"))
