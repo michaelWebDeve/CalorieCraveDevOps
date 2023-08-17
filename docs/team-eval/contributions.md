@@ -23,7 +23,7 @@ Linus Widing
 {:toc}
 </details>
 
-## [Linus Widung]
+## [Linus Widung- Commander in Chief]
 
 Contributions
 : Major Frontend/Backend design decisions (scrollable homepage, filter-/resetbutton, data model)

@@ -35,48 +35,106 @@ nav_order: 4
 
 ---
 
-## [Example, delete this section] Show to-do lists
+##  Login
 
-### `get_lists()`
+### `login()`
 
-**Route:** `/lists/`
+**Route:** `/login`
 
-**Methods:** `GET`
+**Methods:** `"POST", "GET"`
 
-**Purpose:** Show all to-do lists.
-
-**Sample output:**
-
-![get_lists() sample](../assets/images/fswd-intro_00.png)
-
----
-
-### `get_list_todos(list_id)`
-
-**Route:** `/lists/<int:list_id>`
-
-**Methods:** `GET`
-
-**Purpose:** Retrieve all to-do items of to-do list with ID `list_id` from database and present to user.
+**Purpose:** Handle login functionality.
 
 **Sample output:**
 
-![get_list_todos() sample](../assets/images/fswd-intro_02.png)
+![login() sample](../assets/images/login.png)
+
+
 
 ---
+##  Registration
 
-## [Example, delete this section] Insert sample data
+### `register()`
 
-### `run_insert_sample()`
+**Route:** `/register`
 
-**Route:** `/insert/sample`
+**Methods:** `"POST", "GET"`
 
-**Methods:** `GET`
+**Purpose:** Handle register functionality.
+
+**Sample output:**
+
+![register() sample](../assets/images/register.png)
+
+---
+##  Homepage
+### `index()`
+
+**Route:** `/`
+
+**Purpose:** Render homepage.
+
+### `function downloadContent(counter, limit, query_str)`
+
+**Route:** `/api/recipes/?counter=`
+
+**Purpose:** Retrieve and display recipes provided parameters and user preferences. It fetches recipe data from an API 
+endpoint and dynamically generates HTML elements to display the recipes on the page, including their images, names, 
+nutritional information.
+
+### `function toggleFavorite(recipeId, buttonContainer)`
+
+**Route:** `/api/toggle_favorite?user_id=`
+
+**Methods:** `POST`
+
+**Purpose:** Handle the addition and removal of recipes from a user's list of favorite recipes.
+
+**Sample output:**
+
+![index() sample](../assets/images/homepage.png)
+
+
+
+
+---
+##  Recipe detail page
+### `get_recipe()`
+
+**Route:** `/recipe/<recipe_id>`
+
+**Purpose:** Retrieve recipe with `recipe_id` from database and present it to user.
+
+**Sample output:**
+
+![get_recipe() sample](../assets/images/recipe_detail.png)
+
+---
+##  Populate database
+
+### `pop_db()`
+
+**Route:** `/populate-db`
+
 
 **Purpose:** Flush the database and insert sample data set
 
 **Sample output:**
 
+![populate_db() sample](../assets/images/populateDb.png)
+
+---
+## Show own recipes
+### xxxxxxxxxxxxxxxxxxx
+
+**Route:** `xxxxxxxxxxxxxxxxxxxxxxxxxx
+
+
+**Purpose:** xxxxxxxxxxxxxxxxxxxx
+
+**Sample output:**
+
+![populate_db() sample](../assets/images/xxxxxxxxxxx.png)
 Browser shows: `Database flushed and populated with some sample data.`
 
 ## [app.py]
