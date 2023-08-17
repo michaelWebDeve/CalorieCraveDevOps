@@ -1,5 +1,8 @@
+import json
 import os
 import random
+
+import requests as requests
 from flask import Flask, render_template, request, session, redirect, url_for, flash
 
 app = Flask(__name__)
@@ -210,9 +213,12 @@ def pop_db():
         base_image.close()
     return "Database populated!"
 
-@app.route("/test")
-def test():
+
+@app.route("/create-recipe")
+def create_recipe():
     return render_template("create_recipe.html")
+
+
 
 @app.before_request
 def create_database():

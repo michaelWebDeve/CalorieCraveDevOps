@@ -5,10 +5,10 @@
 {% block content %}
     <div class="d-flex flex-row">
         <div class="w-50 me-2 my-2">
-            <h2 class="text-center text-secondary-custom">Describe Recipe</h2>
+            <h2>Describe Recipe</h2>
             <div class="d-flex flex-row">
-                <div class="mb-3 w-50 me-1 input-group text-secondary">
-                    <div class="form-floating">
+                <div class="mb-3 w-50 me-1 mt-1 d-flex align-items-end">
+                    <div class="w-100 text-secondary form-floating">
                         <input type="text" class="form-control" id="name" placeholder="Recipe name">
                         <label for="name">Recipe name</label>
                     </div>
@@ -18,38 +18,57 @@
                     <input class="form-control" type="file" accept=".jpg,.gif,.png" id="image">
                 </div>
             </div>
-            <div class="mb-3">
-                <textarea class="form-control" id="description" aria-label="With textarea"
-                          placeholder="Recipe Description"></textarea>
+            <div class="mb-3 text-secondary form-floating">
+                        <textarea class="form-control" id="description" aria-label="With textarea"
+                                  placeholder="Recipe Description"></textarea>
+                <label for="description">Recipe description</label>
             </div>
-            <div class="mb-3">
-                <div class="form-check form-switch">
-                    <input class="form-check-input" type="checkbox" id="vegetarian">
-                    <label class="form-check-label" for="vegetarian">Vegetarian</label>
+            <div class="mb-3 d-flex flex-row justify-content-between">
+                <div class="w-50 d-flex flex-row">
+                    <div class="me-2">
+                        <div class="form-check form-switch">
+                            <input class="form-check-input" type="checkbox" id="vegetarian">
+                            <label class="form-check-label" for="vegetarian">Vegetarian</label>
+                        </div>
+                        <div class="form-check form-switch">
+                            <input class="form-check-input" type="checkbox" id="vegan">
+                            <label class="form-check-label" for="vegan">Vegan</label>
+                        </div>
+                    </div>
+                    <div>
+                        <div class="form-check form-switch">
+                            <input class="form-check-input" type="checkbox" id="gluten_free">
+                            <label class="form-check-label" for="gluten_free">Gluten free</label>
+                        </div>
+                    </div>
                 </div>
-                <div class="form-check form-switch">
-                    <input class="form-check-input" type="checkbox" id="vegan">
-                    <label class="form-check-label" for="vegan">Vegan</label>
-                </div>
-                <div class="form-check form-switch">
-                    <input class="form-check-input" type="checkbox" id="gluten_free">
-                    <label class="form-check-label" for="gluten_free">Gluten free</label>
+                <div class="w-50">
+                    <div class="input-group">
+                        <div class="text-secondary form-floating">
+                            <input type="number" class="form-control" id="prep_time" placeholder="Prep time">
+                            <label for="prep_time">Prep time</label>
+                        </div>
+                        <span class="input-group-text w-25 justify-content-center">min</span>
+                    </div>
                 </div>
             </div>
-            <div class="mb-3">
+            <div class="mb-3 text-secondary form-floating">
                 <textarea class="form-control" id="instruction" aria-label="With textarea"
                           placeholder="Recipe Instructions"
                           style="min-height: 100px;"></textarea>
+                <label for="instruction">Recipe Instructions</label>
             </div>
-            <div class="mb-3 w-25 me-1">
-                <label for="prep_time" class="form-label">Prep time</label>
-                <input type="number" class="form-control" id="prep_time" placeholder="Prep time">
+            <div class="d-flex flex-row justify-content-between align-items-center">
+                <div>
+                    <h2 class="text-primary-custom" id="recipe_kcal">0 kcal total</h2>
+                    <h4 class="text-secondary-custom" id="recipe_protein">0g protein total</h4>
+                </div>
+                <button class="btn btn-success" id="finish_button">Create recipe</button>
             </div>
-            <button class="btn btn-primary" id="finish_button">Create recipe</button>
         </div>
         <div class="w-50 ms-2 my-2">
             <div class="d-flex justify-content-between flex-row mb-2">
-                <h2 class="text-secondary-custom">Ingredients</h2>
+                <h2>Ingredients</h2>
                 <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">Add
                     Ingredient
                 </button>
@@ -129,6 +148,8 @@
         var maxH = $('#ing_container').css("height");
         $('#ing_container').css({"maxHeight": maxH});
         var ings = [];
+        kcal = 0;
+        protein = 0;
     </script>
 
     <!--Listener-->
@@ -147,21 +168,11 @@
             console.log(ings);
             addIngredient(ing)
             $('#exampleModal').modal('hide');
-        });
+            kcal = kcal + ing.calcKcal();
+            protein = protein + ing.calcProtein();
+            $("#recipe_kcal").html(kcal + " kcal total");
+            $("#recipe_protein").html(protein + "g protein total");
 
-        // Ingredient add button listener
-        $("#add_ing_button").on("click", function () {
-            var ing_name = $("#ing_name").val();
-            var ing_brand = $("#ing_brand").val();
-            var ing_carbs = $("#ing_carbs").val();
-            var ing_fat = $("#ing_fat").val();
-            var ing_protein = $("#ing_protein").val();
-            var ing_amount_used = $("#ing_amount_used").val();
-            const ing = new Ingredient(ing_name, ing_brand, ing_carbs, ing_fat, ing_protein, ing_amount_used);
-            ings.push(ing);
-            console.log(ing.calcKcal());
-            console.log(ings);
-            addIngredient(ing)
         });
 
         // Ingredient input change listener
@@ -190,10 +201,16 @@
             const index = $(this).closest(".ingredient-element").index();
             console.log(index);
 
+            const delIng = ings.at(index);
+            console.log(delIng);
             ings.splice(index, 1);
 
             $(this).closest(".ingredient-element").remove();
-            console.log(ings)
+
+            kcal = kcal - delIng.calcKcal();
+            protein = protein - delIng.calcProtein();
+            $("#recipe_kcal").html(kcal + " kcal total");
+            $("#recipe_protein").html(protein + "g protein total");
         });
 
         // Create recipe button listener
@@ -222,6 +239,7 @@
                 success: function (response) {
                     // Handle success response from the server
                     console.log("Data sent successfully", response);
+                    window.open("/","_self");
                 },
                 error: function (error) {
                     // Handle error response from the server
