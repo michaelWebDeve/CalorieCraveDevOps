@@ -26,13 +26,13 @@
     <form method="POST" id="changeEmailForm" action="{{ url_for('change_email') }}">
         <fieldset>
             <legend>Change your Email</legend>
-            <div class="mb-3">
-                <label for="newEmail" class="form-label">New Email:</label>
+            <div class="text-secondary form-floating mb-3">
                 <input type="email" class="form-control" id="newEmail" name="newEmail" placeholder="Enter new Email" required>
+                <label for="newEmail" class="form-label">Enter new Email</label>
             </div>
-            <div class="mb-3">
-                <label for="currentPasswordChangeEmail" class="form-label">Current Password:</label>
+            <div class="text-secondary form-floating mb-3">
                 <input type="password" class="form-control" id="currentPasswordChangeEmail" name="currentPasswordChangeEmail" placeholder="Enter Password" required>
+                <label for="currentPasswordChangeEmail" class="form-label">Enter Password</label>
             </div>
             <div class="mb-3">
                 <button type="submit" class="btn btn-primary">Change Email</button>
@@ -42,31 +42,22 @@
     <form method="POST" id="changePasswordForm" action="{{ url_for('change_password') }}">
         <fieldset>
             <legend>Change your Password</legend>
-            <div class="mb-3">
-                <label for="currentPassword" class="form-label">Current Password:</label>
-                <input type="password" class="form-control" id="currentPassword" name="currentPassword" placeholder="Enter Password" required>
+            <div class="text-secondary form-floating mb-3">
+                <input type="password" class="form-control" id="currentPassword" name="currentPassword" placeholder="Enter password" required>
+                <label for="currentPassword" class="form-label">Enter password</label>
             </div>
-            <div class="mb-3">
-                <label for="newPassword" class="form-label">New Password:</label>
-                <input type="password" class="form-control" id="newPassword" name="newPassword" placeholder="Enter new Password" required>
+            <div class="text-secondary form-floating mb-3">
+                <input type="password" class="form-control" id="newPassword" name="newPassword" placeholder="Enter new password" required>
+                <label for="newPassword" class="form-label">Enter new password</label>
             </div>
-            <div class="mb-3">
-                <label for="newPassword2" class="form-label">Confirm New Password:</label>
-                <input type="password" class="form-control" id="newPassword2" name="newPassword2" placeholder="Confirm new Password" required>
+            <div class="text-secondary form-floating mb-3">
+                <input type="password" class="form-control" id="newPassword2" name="newPassword2" placeholder="Confirm new password" required>
+                <label for="newPassword2" class="form-label">Confirm new password</label>
             </div>
             <div class="mb-3">
                 <button type="submit" class="btn btn-primary">Change Password</button>
             </div>
         </fieldset>
     </form>
-    <form method="POST" id="showFavoriteRecipesForm">
-        <fieldset>
-            <legend>Your Favorite Recipes</legend>
-            <div class="mb-3">
-                <button type="submit" class="btn btn-primary" id="showFavoriteRecipes">Show Recipes</button>
-            </div>
-        </fieldset>
-    </form>
 </div>
-
 {% endblock %}
