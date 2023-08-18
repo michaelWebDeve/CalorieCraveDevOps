@@ -1,41 +1,28 @@
 # Contents of this repository
 
-This repository contains some starter code for your semester project:
+## Calorie Crave Project
+- Project for Modul: Entwicklung von Web-Anwendungen
+- Prof: Alexander Eck
+- Students: Linus Widing, Justin Grünberg and Michael Otieno
 
-+ The example code from the *"[intro to full-stack web development with Flask](https://hwrberlin.github.io/fswd/02-fswd-intro.html)"* session
-+ A basic structure for your documentation page
+## Executing the app
+1. set up and activate a [Python Virtual Environment](https://hwrberlin.github.io/fswd/01-python-vscode.html#32-use-the-python-virtual-environment-as-default-for-this-workspace).
+2. install the required Python packages from the terminal with the command `pip install -r requirements.txt`:
+3. start the web server via ` gunicorn -w 4 -b 0.0.0.0:8000 app:app`
+4. you can now sign in or up and use the app to your desire
 
-## Steps to execute the example code
+**Creating demo recipes**
 
-**Step 1:** set up and activate a [Python Virtual Environment](https://hwrberlin.github.io/fswd/01-python-vscode.html#32-use-the-python-virtual-environment-as-default-for-this-workspace).
+- Database can be populated with demo recipes to get a better understanding of what the app will look and feel like. 
+- To do so go to the route : `/populate-db`
+- You can now go back to the home page and reload the page.
 
-**Step 2:** install the required Python packages from the terminal with the command `pip install -r requirements.txt`:
-
-```shell
-(venv) C:\Users\me\projects\webapp> pip install -r requirements.txt
-```
-
-> I created the file `📄requirements.txt` with this command: `pip freeze > requirements.txt`
-
-**Step 3:** initialize the app's SQLite database via `flask init-db`:
-
-```shell
-(venv) PS C:\Users\me\projects\webapp> flask init-db
-Database has been initialized.
-```
-
-**Step 4:** start the web server via `flask run --reload`:
-
-```shell
-(venv) PS C:\Users\me\projects\webapp> flask run --reload
- * Debug mode: off
-WARNING: This is a development server. Do not use it in a production deployment.
-Use a production WSGI server instead.
- * Running on http://127.0.0.1:5000
-Press CTRL+C to quit
- * Restarting with stat
-```
-
-**Step 5:** visit [http://127.0.0.1:5000/insert/sample](http://127.0.0.1:5000/insert/sample) to populate the app's database with some sample data.
-
-**Step 6:** visit [http://127.0.0.1:5000/](http://127.0.0.1:5000/) to view the landing page
+## Using the app
+- The app is designed to be als intuitive as possible 
+- You can use the navbar to navigate to all important pages
+- On the home-page itself you can filter recipes using the form on the left
+- Clicking the title of a recipe will lead you to further details
+- When creating a new recipe the recipe itself should be described on the left and Ingredients can be added on the right side of the page
+- To add a recipe to your favorites simply click the heart on the right of a recipe
+- If you want to view your favorite recipes simply turn on the 'Show favorites' filter and press filter
+- 
