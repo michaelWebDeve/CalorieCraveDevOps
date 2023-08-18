@@ -4,10 +4,9 @@ parent: Technical Docs
 nav_order: 2
 ---
 
-[Jane Dane]
-{: .label }
+Michael Otieno {: .label .label-red }
 
-# [App behavior]
+# App behavior
 {: .no_toc }
 
 <details open markdown="block">
