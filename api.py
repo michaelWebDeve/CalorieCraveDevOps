@@ -89,13 +89,13 @@ def fetch_recipes():
             counter = int(request.args.get("counter"))
             recipes = recipes.paginate(page=counter, per_page=limit)
 
-    res = []
-    for r in recipes:
-        res_dict = r.to_dict(rules=("img_path", "ingredients_amount"))
-        if "user_id" in request.args:
-            res_dict["favorite"] = r.is_favorite(request.args["user_id"])
-        res.append(res_dict)
-    return res
+        res = []
+        for r in recipes:
+            res_dict = r.to_dict(rules=("img_path", "ingredients_amount"))
+            if "user_id" in request.args:
+                res_dict["favorite"] = r.is_favorite(request.args["user_id"])
+            res.append(res_dict)
+        return res
 
 
 @api.route("/toggle_favorite", methods=["POST"])
