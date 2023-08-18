@@ -124,18 +124,18 @@ nutritional information.
 ![populate_db() sample](../assets/images/populateDb.png)
 
 ---
-## Show own recipes
-### xxxxxxxxxxxxxxxxxxx
+---
+## User page
+### `user()`
+**Methods:** `POST`
 
-**Route:** `xxxxxxxxxxxxxxxxxxxxxxxxxx
+**Route:** `/user`
 
-
-**Purpose:** xxxxxxxxxxxxxxxxxxxx
+**Purpose:** Redirect to user.html.
 
 **Sample output:**
 
-![populate_db() sample](../assets/images/xxxxxxxxxxx.png)
-Browser shows: `Database flushed and populated with some sample data.`
+![user() sample](../assets/images/user.png)
 
 ## [app.py]
 
