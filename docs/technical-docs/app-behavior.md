@@ -4,19 +4,8 @@ parent: Technical Docs
 nav_order: 2
 ---
 
-[Jane Dane]
-{: .label }
+Michael Otieno {: .label .label-red }
 
-# [App behavior]
-{: .no_toc }
-
-<details open markdown="block">
-  <summary>
-    Table of contents
-  </summary>
-  {: .text-delta }
-- TOC
-{:toc}
-</details>
+# App behavior
 
 ![populate_db() sample](../assets/images/appbehavior.png)
