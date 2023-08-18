@@ -4,7 +4,8 @@ parent: Technical Docs
 nav_order: 2
 ---
 
-Michael Otieno {: .label .label-red }
+Michael Otieno 
+{: .label .label-red }
 
 # App behavior
 {: .no_toc }
