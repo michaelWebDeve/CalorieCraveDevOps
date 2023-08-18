@@ -18,3 +18,5 @@ nav_order: 2
 - TOC
 {:toc}
 </details>
+
+![populate_db() sample](../assets/images/appbehavior.png)
