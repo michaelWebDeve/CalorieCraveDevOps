@@ -22,13 +22,19 @@ Linus Widing
 {:toc}
 </details>
 
-Reflecting on our backend design decisions, we recognize that opting for plain SQL instead of SQLAlchemy 
-would have been a more favorable choice. While SQLAlchemy provided certain conveniences, such as abstracting database
-interactions, we encountered complexities and a learning curve that proved time-consuming. The process of grasping the 
-underlying concepts and effectively implementing them took longer than anticipated.
-With a preference for plain SQL, we believe that we could have achieved a simpler and more efficient backend design. 
-This approach would have allowed us to have a deeper understanding of the database interactions and the underlying 
-structure.
-In future projects, we would prioritize thoroughly evaluating the pros and cons of different technologies before making 
-a decision. This experience has underscored the importance of considering the learning curve, potential complexities, 
-and alignment with project goals. 
+Throughout the development process, our collaborative efforts have resulted in the creation of a functional 
+and user-friendly recipe-sharing app. As a team, we have made major design decisions both on the frontend and backend, 
+which have greatly contributed to the app's overall look and functionality. The decision to implement a scrollable
+homepage with filter and reset buttons has enhanced the user experience, allowing for efficient navigation and recipe 
+discovery. Collectively, we have aimed to integrate these features, ensuring that users can easily engage with the app's 
+functionalities. The app's design, with the scrollable home page being our main feature, in line with our initial ideation, 
+have been realized effectively.
+
+Our collaborative approach, emphasis on Git workflow, and dedication to meeting course requirements have contributed to
+our app's success. However, due to time constraints, we were unable to implement the functionality that would have allowed 
+users to edit their own recipes after submission. This is a feature that we acknowledge as valuable but was left out in 
+the interest of completing other core aspects of the app. 
+
+We believe that the skills and insights gained from this project will greatly benefit us in future projects. This app, 
+which we've built to meet our own requirements, showcases our commitment to practical development and learning, and we 
+are proud to have achieved all of our set goals in the process.
