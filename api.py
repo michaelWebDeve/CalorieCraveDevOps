@@ -11,7 +11,7 @@ from app import app
 
 
 @api.route("/recipes/", methods=["GET", "POST"])
-def fetch_recipes():
+def handle_recipes():
     if request.method == "POST":
         recipe_data = json.loads(request.form.get("recipe"))
         recipe = Recipe(
@@ -99,7 +99,7 @@ def fetch_recipes():
 
 
 @api.route("/toggle_favorite", methods=["POST"])
-def add_to_favourites():
+def handle_favorites():
     args = request.args
     if "user_id" and "recipe_id" in args:
         user_id = int(request.args.get("user_id"))
