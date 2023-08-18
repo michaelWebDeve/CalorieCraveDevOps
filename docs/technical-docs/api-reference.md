@@ -149,6 +149,10 @@ In this section we go over all the different routes that belong to out applicati
 ---
 
 ## API routes
+
+Linus Widing
+{: .label }
+
 These routes are designed to provide a RESTful API for the data of this app. This is helpful to easily get or post data from different points in the app or to help other parties to access the data.
 
 **Route prefix:** `/api` 
