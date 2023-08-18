@@ -90,7 +90,7 @@ Browser shows: `Database flushed and populated with some sample data.`
 **Purpose:** allows a logged-in user to change their email address. It checks if the user is logged in and verifies the current password. If everything is correct, it updates the email address in the database and session, then notifies the user of the successful change.
 
 **Sample output:**
-
+![Change Email](../assets/images/change_email.png)
 
 
 ## [app.py]
@@ -104,4 +104,5 @@ Browser shows: `Database flushed and populated with some sample data.`
 **Purpose:** allows a logged-in user to change their password. It performs checks to ensure the user is authenticated, the new password and its confirmation match, and the current password is correct. If all validations pass, it updates the user's password in the database.
 
 **Sample output:**
+![Change Password](../assets/images/change_password.png)
 
