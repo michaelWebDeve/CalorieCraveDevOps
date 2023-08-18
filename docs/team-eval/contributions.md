@@ -13,7 +13,7 @@ Linus Widing
 
 # Summary of individual contributions
 {: .attention }
-> to Eck: Die Commit-History ist nicht akkurat! Die meiste Arbeit is in direkter Zusammenarbeit entstanden. Wir haben viel in Präsenz oder über einen Call zusammen gemacht, um auf den selben Wissensstand zu kommen.
+> please consider: Die Commit-History ist nicht akkurat! Die meiste Arbeit is in direkter Zusammenarbeit entstanden. Wir haben viel in Präsenz oder über einen Call zusammen gemacht, um auf den selben Wissensstand zu kommen.
 
 {: .no_toc }
 
