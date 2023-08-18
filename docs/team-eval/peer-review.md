@@ -23,7 +23,7 @@ Linus Widing
 {:toc}
 </details>
 
-### Linus Widing - review 1
+## Linus Widing - review 1
 Linus Widing
 {: .label }
 
@@ -39,7 +39,7 @@ A specific observation, regarding know-how, effectiveness, team work or from ano
 
 [What should be changed or strengthened for the point of view of the reviewer? ]
 
-### Michael Otieno - review 2
+## Michael Otieno - review 2
 Michael Otieno
 {: .label .label-red }
 
@@ -64,7 +64,7 @@ boundaries of our know-how can be beneficial, we should also ensure that the lea
 This might involve breaking down the introduction of new technologies into smaller steps or allocating more time for 
 skill acquisition. 
 
-### Justin Grünberg - review 3
+## Justin Grünberg - review 3
 Justin Grünberg
 {: .label .label-green }
 
