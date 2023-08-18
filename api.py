@@ -29,15 +29,16 @@ def handle_recipes():
         ingredients = []
         for ing in recipe_data["ings"]:
             ingredient = RecipeIngredient(
-                name = ing["ing_name"],
-                brand = ing["ing_brand"],
-                quantity = int(ing["ing_amount_used"]),
+                name=ing["ing_name"],
+                brand=ing["ing_brand"],
+                quantity=int(ing["ing_amount_used"]),
                 fat=int(ing["ing_fat"]),
                 carbs=int(ing["ing_carbs"]),
                 protein=int(ing["ing_protein"]),
                 recipe=recipe
             )
-            total_kcal += ((ingredient.protein * 4.1) + (ingredient.carbs * 4.1) + (ingredient.fat * 9.3)) * (ingredient.quantity / 100)
+            total_kcal += ((ingredient.protein * 4.1) + (ingredient.carbs * 4.1) + (ingredient.fat * 9.3)) * (
+                        ingredient.quantity / 100)
             total_protein += ingredient.protein * (ingredient.quantity / 100)
             ingredients.append(ingredient)
 
@@ -84,6 +85,10 @@ def handle_recipes():
                 favorite_recipe_ids = [fav.recipe_id for fav in favorite_recipes]
                 recipes = recipes.filter(Recipe.id.in_(favorite_recipe_ids))
 
+        if "owned_only" in request.args:
+            user_id = request.args.get("user_id")
+            recipes = recipes.filter(Recipe.created_by == user_id)
+
         if ("limit" and "counter") in request.args:
             limit = int(request.args.get("limit"))
             counter = int(request.args.get("counter"))
@@ -115,6 +120,3 @@ def handle_favorites():
             db.session.commit()
             return "off"
     return "non"
-
-
-

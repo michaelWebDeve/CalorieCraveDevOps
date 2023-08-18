@@ -61,11 +61,11 @@
                 <div class="mb-3">
                     <div class="form-check form-switch">
                         <input class="form-check-input" type="checkbox" id="favorites">
-                        <label class="form-check-label" for="vegetarian">Show favourites</label>
+                        <label class="form-check-label" for="favorites">Show favourites</label>
                     </div>
                     <div class="form-check form-switch">
                         <input class="form-check-input" type="checkbox" id="own_recipes">
-                        <label class="form-check-label" for="vegan">Show own recipes </label>
+                        <label class="form-check-label" for="own_recipes">Show own recipes </label>
                     </div>
                 </div>
 
@@ -110,6 +110,7 @@
             var vegan = $("#vegan").is(":checked");
             var gluten_free = $("#gluten_free").is(":checked");
             var favorites_only = $("#favorites").is(":checked");
+            var owned_only = $("#own_recipes").is(":checked");
 
 
             if (min_kcal) {
@@ -135,6 +136,9 @@
             }
             if (favorites_only) {
                 query_str = query_str + "&favorites_only=" + favorites_only;
+            }
+            if(owned_only){
+                query_str = query_str + "&owned_only=" + owned_only;
             }
             flushContent();
             counter = 1;
