@@ -4,10 +4,15 @@ parent: Technical Docs
 nav_order: 4
 ---
 
-[Jane Dane]
+Michael Otieno
+{: .label .label-red }
+Linus Widing
 {: .label }
+Justin Grünberg
+{: .label .label-green }
 
-# [API reference]
+# API reference
+In this section we go over all the different routes that belong to out application.Therefore we will go over normal app routes and routes that are dedicated to an extra API which is designed to be independent to the app´s logic. 
 {: .no_toc }
 
 <details open markdown="block">
@@ -19,25 +24,12 @@ nav_order: 4
 {:toc}
 </details>
 
-## [Section / module]
 
-### `function_definition()`
+## App routes
 
-**Route:** `/route/`
+###  Login
 
-**Methods:** `POST` `GET` `PATCH` `PUT` `DELETE`
-
-**Purpose:** [Short explanation of what the function does and why]
-
-**Sample output:**
-
-[Show an image, string output, or similar illustration -- or write NONE if function generates no output]
-
----
-
-##  Login
-
-### `login()`
+`login()`
 
 **Route:** `/login`
 
@@ -49,12 +41,11 @@ nav_order: 4
 
 ![login() sample](../assets/images/login.png)
 
-
-
 ---
-##  Registration
 
-### `register()`
+###  Registration
+
+`register()`
 
 **Route:** `/register`
 
@@ -67,30 +58,15 @@ nav_order: 4
 ![register() sample](../assets/images/register.png)
 
 ---
-##  Homepage
-### `index()`
+
+###  Homepage
+`index()`
 
 **Route:** `/`
 
-**Purpose:** Render homepage.
+**Methods:** `"GET"`
 
-### `function downloadContent(counter, limit, query_str)`
-
-**Route:** `/api/recipes/?counter=`
-
-**Purpose:** Retrieve and display recipes provided parameters and user preferences. It fetches recipe data from an API 
-endpoint and dynamically generates HTML elements to display the recipes on the page, including their images, names, 
-nutritional information.
-
-### `function toggleFavorite(recipeId, buttonContainer)`
-
-**Route:** `/api/toggle_favorite?user_id=`
-
-**Methods:** `POST`
-
-**Purpose:** Handle the addition and removal of recipes from a user's list of favorite recipes.
-
-**Sample output:**
+**Purpose:** Render the homepage with different recipes. These recipes can be filtered to the users desire. Recipes are being queried via the API.
 
 ![index() sample](../assets/images/homepage.png)
 
@@ -98,10 +74,13 @@ nutritional information.
 
 
 ---
-##  Recipe detail page
-### `get_recipe()`
+
+###  Recipe detail page
+`get_recipe()`
 
 **Route:** `/recipe/<recipe_id>`
+
+**Methods:** `"GET"`
 
 **Purpose:** Retrieve recipe with `recipe_id` from database and present it to user.
 
@@ -110,12 +89,14 @@ nutritional information.
 ![get_recipe() sample](../assets/images/recipe_detail.png)
 
 ---
-##  Populate database
 
-### `pop_db()`
+###  Populate database
+
+`pop_db()`
 
 **Route:** `/populate-db`
 
+**Methods:** `"GET"`
 
 **Purpose:** Flush the database and insert sample data set
 
@@ -124,43 +105,74 @@ nutritional information.
 ![populate_db() sample](../assets/images/populateDb.png)
 
 ---
-## Show own recipes
-### xxxxxxxxxxxxxxxxxxx
 
-**Route:** `xxxxxxxxxxxxxxxxxxxxxxxxxx
+### User settings
+**Route:** `/user`
 
+**Methods:** `"GET"`
 
-**Purpose:** xxxxxxxxxxxxxxxxxxxx
+**Purpose:** Change user information like E-Mail or password.
 
 **Sample output:**
+![User](../assets/images/user.png)
 
-![populate_db() sample](../assets/images/xxxxxxxxxxx.png)
-Browser shows: `Database flushed and populated with some sample data.`
+---
 
-## [app.py]
+### Change E-Mail
 
-### `change_email():`
+`change_email():`
 
 **Route:** `/change_email`
 
-**Methods:** `POST`
+**Methods:** `"POST"`
 
 **Purpose:** allows a logged-in user to change their email address. It checks if the user is logged in and verifies the current password. If everything is correct, it updates the email address in the database and session, then notifies the user of the successful change.
 
 **Sample output:**
 ![Change Email](../assets/images/change_email.png)
 
+---
 
-## [app.py]
+### Change password
 
-### `change_password()`
+`change_password()`
 
 **Route:** `/change_password`
 
-**Methods:** `POST` 
+**Methods:** `"POST"` 
 
 **Purpose:** allows a logged-in user to change their password. It performs checks to ensure the user is authenticated, the new password and its confirmation match, and the current password is correct. If all validations pass, it updates the user's password in the database.
 
 **Sample output:**
 ![Change Password](../assets/images/change_password.png)
 
+---
+
+## API routes
+These routes are designed to provide a RESTful API for the data of this app. This is helpful to easily get or post data from different points in the app or to help other parties to access the data.
+
+**Route prefix:** `/api` 
+
+### Handle recipes
+
+`handle_recipes()`
+
+**Route:** `/recipes`
+
+**Methods:** `"GET", "POST"` 
+
+**Purpose:** Get or post recipes from the database. It is possible to get JSON of recipes that can be filtered via the url´s query string. You can also upload new recipes via a custom post request
+
+---
+
+### Handle favorite recipes
+
+`handle_favorites()`
+
+**Route:** `/toggle_favorite`
+
+**Methods:** `"POST"` 
+
+**Purpose:** Add and remove favorite recipes for different users. 
+
+---
