@@ -29,15 +29,22 @@ Linus Widing
 
 ### My observation 
 
-A specific observation, regarding know-how, effectiveness, team work or from another relevant area
+- the know how was not always balanced
+  - group meetings where we worked together helped a lot 
+- communication was very good
+- workflow with GitHub also good
+  - merging was a bit tedious sometimes
 
 ### Effect on me 
 
-[What positive or negative effect did this observation have on the reviewer?]
-
+- sometimes I had problems waiting with a task for all of us to come together because I wanted to finish it right away
+  - but due to the know-how difference that wouldn't have been productive
+- sometimes it was also hard for me to fully let go of a task someone else had to do
 ### Tip for the future 
 
-[What should be changed or strengthened for the point of view of the reviewer? ]
+- keep the good communication 
+- maybe set different members of the team to be specialists for certain tasks
+  - this could lead to an easier split in tasks
 
 ## Michael Otieno - review 2
 Michael Otieno
