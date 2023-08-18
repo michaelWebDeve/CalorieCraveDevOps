@@ -5,10 +5,13 @@
 - Prof: Alexander Eck
 - Students: Linus Widing, Justin Grünberg and Michael Otieno
 
+## Documentation
+[Link to GitHubPages](https://hwrberlin.github.io/fswd-s23-LinusW-HWR/)
+
 ## Executing the app
 1. set up and activate a [Python Virtual Environment](https://hwrberlin.github.io/fswd/01-python-vscode.html#32-use-the-python-virtual-environment-as-default-for-this-workspace).
 2. install the required Python packages from the terminal with the command `pip install -r requirements.txt`:
-3. start the web server via ` gunicorn -w 4 -b 0.0.0.0:8000 app:app`
+3. start the web server via `gunicorn -w 4 -b 0.0.0.0:8000 app:app`
 4. go to your browser and open [http://0.0.0.0:8000/](http://0.0.0.0:8000/)
 5. you can now sign in or up and use the app to your desire
 
