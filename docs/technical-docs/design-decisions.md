@@ -161,5 +161,10 @@ better to constantly server new recipes.
 
 ### Regarded options
 
+|      | Pagination                                                          | Infinite Scroll                                                       |
+|------|---------------------------------------------------------------------|-----------------------------------------------------------------------|
+| Pros | - Easier to implement                                               | - A bit more work to do                                               |
+| Cons | - Does not fit the social media style and is more work for the user | - Fits the social media style perfectly and is optimal for lazy users |
+
 ---
 
