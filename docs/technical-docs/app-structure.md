@@ -4,7 +4,8 @@ parent: Technical Docs
 nav_order: 1
 ---
 
-Justin Grünberg {: .label .label-green }
+Justin Grünberg 
+{: .label .label-green }
 
 # App structure, incl. Data-Model
 {: .no_toc }
