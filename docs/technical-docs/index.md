@@ -4,7 +4,12 @@ has_children: true
 nav_order: 2
 ---
 
-[Jane Dane]
+Michael Otieno
+{: .label .label-red }
+Justin Grünberg
+{: .label .label-green }
+Linus Widing
 {: .label }
+
 
 # [Technical documentation]
