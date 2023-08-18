@@ -11,7 +11,7 @@ Justin Grünberg
 Linus Widing
 {: .label }
 
-# [Summary of individual contributions]
+# Summary of individual contributions
 {: .no_toc }
 
 <details open markdown="block">
@@ -23,7 +23,7 @@ Linus Widing
 {:toc}
 </details>
 
-## [Linus Widung- Commander in Chief]
+## Linus Widung
 
 Contributions
 : Major Frontend/Backend design decisions (scrollable homepage, filter-/resetbutton, data model)
@@ -32,14 +32,14 @@ Contributions
 : App ideation
 
 
-## [Justin Grünberg]
+## Justin Grünberg
 
 Contributions
 : Front/Backend design decisions(User page)
 : App ideation
 : Frontend design of recipe upload page
 
-## [Michael Otieno]
+## Michael Otieno
 
 Contributions
 : Building on Frontend/Backend design decision and extending it (Enabling like-, showing favourites and own recipe-function)

@@ -11,7 +11,7 @@ Justin Grünberg
 Linus Widing
 {: .label }
 
-# [Goals achieved and missed]
+# Goals achieved and missed
 {: .no_toc }
 
 <details open markdown="block">
