@@ -54,6 +54,7 @@ nav_order: 1
 - to apply the filters, press the 'Filter' button below the toggle buttons
 - to reset the filter, press 'Reset'
 - the filters can be applied individually or in combination
+- Under the filter and reset buttons, there are two additional toggle buttons that allow you to filter by: Favorite recipes own recipes
 
 **Like recipes and add to favorite list**
 
