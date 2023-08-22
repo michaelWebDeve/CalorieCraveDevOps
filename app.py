@@ -1,8 +1,7 @@
-import json
+
 import os
 import random
 
-import requests as requests
 from flask import Flask, render_template, request, session, redirect, url_for, flash
 
 app = Flask(__name__)
