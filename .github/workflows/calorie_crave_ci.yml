@@ -70,4 +70,4 @@ jobs:
 
       - name: Test with unittest
         run: |
-          test.py
+          unittets
