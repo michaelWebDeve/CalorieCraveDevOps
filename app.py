@@ -222,3 +222,7 @@ def create_recipe():
 @app.before_request
 def create_database():
     db.create_all()
+
+
+if __name__ == "__main__":
+    app.run(debug=True)
