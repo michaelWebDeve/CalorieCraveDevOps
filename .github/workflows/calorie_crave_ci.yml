@@ -70,5 +70,4 @@ jobs:
 
       - name: Test with unittest
         run: |
-          pip install unittest2-0.0.0.tar.gz
           unittest test.py
