@@ -13,10 +13,6 @@ permissions:
   contents: read
 
 jobs:
- deploy:
-   - name: Create annotation for build error
-       run: echo "deploy job"
-
   test:
     runs-on: ubuntu-latest
     steps:
