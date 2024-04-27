@@ -32,20 +32,20 @@ jobs:
   deploy:
     runs-on: ubuntu-latest
     name: build discover and deploy
-    steps:
-      - uses: actions/checkout@v2
-      - name: Start Minikube
-        run: |
-          minikube start
-      - name: Set up Docker environment
-        run: |
-          minikube docker-env | Invoke-Expression
-      - name: Build Docker image
-        run: docker build -t caloriecrave27 .
-      - name: Apply Kubernetes configuration
-        run: kubectl apply -f ./pod_config.yaml
-      - name: Check deployed pods
-        run: kubectl get pod
-      - name: Port forward to pod
-        run: kubectl port-forward caloriecrave 5000:5000
+  steps:
+    - uses: actions/checkout@v2
+    - name: Start Minikube
+      run: |
+        minikube start
+    - name: Set up Docker environment
+      run: |
+        eval $(minikube docker-env)
+    - name: Build Docker image
+      run: docker build -t caloriecrave27 .
+    - name: Apply Kubernetes configuration
+      run: kubectl apply -f ./pod_config.yaml
+    - name: Check deployed pods
+      run: kubectl get pod
+    - name: Port forward to pod
+      run: kubectl port-forward caloriecrave 5000:5000
 
