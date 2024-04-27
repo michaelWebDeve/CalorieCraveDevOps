@@ -43,7 +43,7 @@ jobs:
       - name: Build Docker image
         run: docker build -t caloriecrave27 .
       - name: Apply Kubernetes configuration
-        run: kubectl apply -f ./pod_config.yaml
+        run: kubectl create -f ./pod_config.yaml
       - name: Check deployed pods
         run: kubectl get pod
       - name: Port forward to pod
