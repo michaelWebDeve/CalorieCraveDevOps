@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: caloriecrave
+spec:
+  containers:
+    - name: caloriecrave
+      image: caloriecrave27:latest
+      imagePullPolicy: Never
+      resources:
+        limits:
+          memory: "500Mi"
