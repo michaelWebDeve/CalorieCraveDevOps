@@ -35,8 +35,10 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - name: Start minikube
-      - run: minikube docker-env | Invoke-Expression
-      - run: docker build -t caloriecrave27 .
-      - run: kubectl create -f ./pod_config.yaml
-      - run: kubectl get pod
-      - run: kubectl port-forward caloriecrave 5000:5000
+      - run: |
+          minikube docker-env | Invoke-Expression
+          docker build -t caloriecrave27 .
+          kubectl create -f ./pod_config.yaml
+          kubectl get pod
+          kubectl port-forward caloriecrave 5000:5000
+
