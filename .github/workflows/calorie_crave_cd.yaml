@@ -39,7 +39,7 @@ jobs:
           minikube start
       - name: Set up Docker environment
         run: |
-          minikube docker-env | Invoke-Expression
+          eval $(minikube docker-env)
       - name: Build Docker image
         run: docker build -t caloriecrave27 .
       - name: Apply Kubernetes configuration
