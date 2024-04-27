@@ -1,0 +1,42 @@
+name: CalorieCraveCd
+
+on:
+  push:
+    branches:
+      - master
+
+permissions:
+  contents: read
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Set up Python
+        uses: actions/setup-python@v1
+        with:
+          python-version: '3.11'
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+
+      - name: Test with unittest
+        run : pytest test.py
+
+
+  deploy:
+    runs-on: ubuntu-latest
+    name: build discover and deploy
+    steps:
+      - uses: actions/checkout@v2
+      - name: Start minikube
+      - run: minikube docker-env | Invoke-Expression
+      - run: docker build -t caloriecrave27 .
+      - run: kubectl create -f ./pod_config.yaml
+      - run: kubectl get pod
+      - run: kubectl port-forward caloriecrave 5000:5000
