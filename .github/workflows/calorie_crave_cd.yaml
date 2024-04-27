@@ -44,8 +44,10 @@ jobs:
         run: docker build -t caloriecrave27 .
       - name: Apply Kubernetes configuration
         run: kubectl create -f ./pod_config.yaml
-      - name: Check deployed pods
+      - name: get deployed pods
         run: kubectl get pod
+      - name: Checkout deployed pods
+        run: kubectl describe pod
       - name: Port forward to pod
         run: kubectl port-forward caloriecrave 5000:5000
 
